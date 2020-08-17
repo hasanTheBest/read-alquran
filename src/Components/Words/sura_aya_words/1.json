@@ -1,0 +1,579 @@
+{
+  "aya": [
+    {
+      "a_id": 1,
+      "verse_key": "1:1",
+      "text": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "1",
+          "wId": 1,
+          "verse_key": "1:1",
+          "char_type": "word",
+          "code": "&#xfb51;",
+          "page": "1",
+          "audio": "/001_001_001.mp3",
+          "text": "بِسْمِ",
+          "translation": {
+            "en": "In (the) name",
+            "bn": "নামে",
+            "trl": "bis'mi"
+          }
+        },
+        {
+          "id": "2",
+          "wId": 2,
+          "verse_key": "1:1",
+          "char_type": "word",
+          "code": "&#xfb52;",
+          "page": "1",
+          "audio": "/001_001_002.mp3",
+          "text": "اللَّهِ",
+          "translation": {
+            "en": "(of) Allah",
+            "bn": "আল্লাহ (র)",
+            "trl": "l-lahi"
+          }
+        },
+        {
+          "id": "3",
+          "wId": 3,
+          "verse_key": "1:1",
+          "char_type": "word",
+          "code": "&#xfb53;",
+          "page": "1",
+          "audio": "/001_001_003.mp3",
+          "text": "الرَّحْمَٰنِ",
+          "translation": {
+            "en": "the Most Gracious",
+            "bn": "পরম করুণাময়",
+            "trl": "l-raḥmāni"
+          }
+        },
+        {
+          "id": "4",
+          "wId": 4,
+          "verse_key": "1:1",
+          "char_type": "word",
+          "code": "&#xfb54;",
+          "page": "1",
+          "audio": "/001_001_004.mp3",
+          "text": "الرَّحِيمِ",
+          "translation": {
+            "en": "the Most Merciful",
+            "bn": "অসীম দয়ালু",
+            "trl": "l-raḥīmi"
+          }
+        },
+        {
+          "id": "5",
+          "code": "&#xfb55;",
+          "code_v3": "&#xa001;",
+          "verse_key": "1:1",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 2,
+      "verse_key": "1:2",
+      "text": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "6",
+          "wId": 5,
+          "verse_key": "1:2",
+          "char_type": "word",
+          "code": "&#xfb56;",
+          "page": "1",
+          "audio": "/001_002_001.mp3",
+          "text": "الْحَمْدُ",
+          "translation": {
+            "en": "All praises and thanks",
+            "bn": "সকল প্রশংসা",
+            "trl": "al-ḥamdu"
+          }
+        },
+        {
+          "id": "7",
+          "wId": 6,
+          "verse_key": "1:2",
+          "char_type": "word",
+          "code": "&#xfb57;",
+          "page": "1",
+          "audio": "/001_002_002.mp3",
+          "text": "لِلَّهِ",
+          "translation": {
+            "en": "(be) to Allah",
+            "bn": "আল্লাহ্‌রই জন্য",
+            "trl": "lillahi"
+          }
+        },
+        {
+          "id": "8",
+          "wId": 7,
+          "verse_key": "1:2",
+          "char_type": "word",
+          "code": "&#xfb58;",
+          "page": "1",
+          "audio": "/001_002_003.mp3",
+          "text": "رَبِّ",
+          "translation": {
+            "en": "(the) Lord",
+            "bn": "(যিনি) রব",
+            "trl": "rabbi"
+          }
+        },
+        {
+          "id": "9",
+          "wId": 8,
+          "verse_key": "1:2",
+          "char_type": "word",
+          "code": "&#xfb59;",
+          "page": "1",
+          "audio": "/001_002_004.mp3",
+          "text": "الْعَالَمِينَ",
+          "translation": {
+            "en": "(of all) the worlds",
+            "bn": "সারা জগতের",
+            "trl": "l-ʿālamīna"
+          }
+        },
+        {
+          "id": "10",
+          "code": "&#xfb5a;",
+          "code_v3": "&#xa002;",
+          "verse_key": "1:2",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 3,
+      "verse_key": "1:3",
+      "text": "الرَّحْمَٰنِ الرَّحِيمِ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "11",
+          "wId": 9,
+          "verse_key": "1:3",
+          "char_type": "word",
+          "code": "&#xfb5b;",
+          "page": "1",
+          "audio": "/001_003_001.mp3",
+          "text": "الرَّحْمَٰنِ",
+          "translation": {
+            "en": "The Most Gracious",
+            "bn": "অশেষ করুণাময়",
+            "trl": "al-raḥmāni"
+          }
+        },
+        {
+          "id": "12",
+          "wId": 10,
+          "verse_key": "1:3",
+          "char_type": "word",
+          "code": "&#xfb5c;",
+          "page": "1",
+          "audio": "/001_003_002.mp3",
+          "text": "الرَّحِيمِ",
+          "translation": {
+            "en": "the Most Merciful",
+            "bn": "পরম দয়ালু",
+            "trl": "l-raḥīmi"
+          }
+        },
+        {
+          "id": "13",
+          "code": "&#xfb5d;",
+          "code_v3": "&#xa003;",
+          "verse_key": "1:3",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 4,
+      "verse_key": "1:4",
+      "text": "مَالِكِ يَوْمِ الدِّينِ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "14",
+          "wId": 11,
+          "verse_key": "1:4",
+          "char_type": "word",
+          "code": "&#xfb5e;",
+          "page": "1",
+          "audio": "/001_004_001.mp3",
+          "text": "مَالِكِ",
+          "translation": {
+            "en": "Master",
+            "bn": "অধিপতি",
+            "trl": "māliki"
+          }
+        },
+        {
+          "id": "15",
+          "wId": 12,
+          "verse_key": "1:4",
+          "char_type": "word",
+          "code": "&#xfb5f;",
+          "page": "1",
+          "audio": "/001_004_002.mp3",
+          "text": "يَوْمِ",
+          "translation": {
+            "en": "(of the) Day",
+            "bn": "দিনের",
+            "trl": "yawmi"
+          }
+        },
+        {
+          "id": "16",
+          "wId": 13,
+          "verse_key": "1:4",
+          "char_type": "word",
+          "code": "&#xfb60;",
+          "page": "1",
+          "audio": "/001_004_003.mp3",
+          "text": "الدِّينِ",
+          "translation": {
+            "en": "(of) [the] Judgment",
+            "bn": "বিচারের",
+            "trl": "l-dīni"
+          }
+        },
+        {
+          "id": "17",
+          "code": "&#xfb61;",
+          "code_v3": "&#xa004;",
+          "verse_key": "1:4",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 5,
+      "verse_key": "1:5",
+      "text": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "18",
+          "wId": 14,
+          "verse_key": "1:5",
+          "char_type": "word",
+          "code": "&#xfb62;",
+          "page": "1",
+          "audio": "/001_005_001.mp3",
+          "text": "إِيَّاكَ",
+          "translation": {
+            "en": "You Alone",
+            "bn": "আপনারই শুধু",
+            "trl": "iyyāka"
+          }
+        },
+        {
+          "id": "19",
+          "wId": 15,
+          "verse_key": "1:5",
+          "char_type": "word",
+          "code": "&#xfb63;",
+          "page": "1",
+          "audio": "/001_005_002.mp3",
+          "text": "نَعْبُدُ",
+          "translation": {
+            "en": "we worship",
+            "bn": "আমরা ইবাদত করি",
+            "trl": "naʿbudu"
+          }
+        },
+        {
+          "id": "20",
+          "wId": 16,
+          "verse_key": "1:5",
+          "char_type": "word",
+          "code": "&#xfb64;",
+          "page": "1",
+          "audio": "/001_005_003.mp3",
+          "text": "وَإِيَّاكَ",
+          "translation": {
+            "en": "and You Alone",
+            "bn": "এবং আপনারই (কাছে  শুধু)",
+            "trl": "wa-iyyāka"
+          }
+        },
+        {
+          "id": "21",
+          "wId": 17,
+          "verse_key": "1:5",
+          "char_type": "word",
+          "code": "&#xfb65;",
+          "page": "1",
+          "audio": "/001_005_004.mp3",
+          "text": "نَسْتَعِينُ",
+          "translation": {
+            "en": "we ask for help",
+            "bn": "আমরা সাহায্য চাই।",
+            "trl": "nastaʿīnu"
+          }
+        },
+        {
+          "id": "22",
+          "code": "&#xfb66;",
+          "code_v3": "&#xa005;",
+          "verse_key": "1:5",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 6,
+      "verse_key": "1:6",
+      "text": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "23",
+          "wId": 18,
+          "verse_key": "1:6",
+          "char_type": "word",
+          "code": "&#xfb67;",
+          "page": "1",
+          "audio": "/001_006_001.mp3",
+          "text": "اهْدِنَا",
+          "translation": {
+            "en": "Guide us",
+            "bn": "আমাদেরকে দেখান",
+            "trl": "ih'dinā"
+          }
+        },
+        {
+          "id": "24",
+          "wId": 19,
+          "verse_key": "1:6",
+          "char_type": "word",
+          "code": "&#xfb68;",
+          "page": "1",
+          "audio": "/001_006_002.mp3",
+          "text": "الصِّرَاطَ",
+          "translation": {
+            "en": "(to) the path",
+            "bn": "পথ",
+            "trl": "l-ṣirāṭa"
+          }
+        },
+        {
+          "id": "25",
+          "wId": 20,
+          "verse_key": "1:6",
+          "char_type": "word",
+          "code": "&#xfb69;",
+          "page": "1",
+          "audio": "/001_006_003.mp3",
+          "text": "الْمُسْتَقِيمَ",
+          "translation": {
+            "en": "the straight",
+            "bn": "সরল সঠিক",
+            "trl": "l-mus'taqīma"
+          }
+        },
+        {
+          "id": "26",
+          "code": "&#xfb6a;",
+          "code_v3": "&#xa006;",
+          "verse_key": "1:6",
+          "char_type": "end"
+        }
+      ]
+    },
+    {
+      "a_id": 7,
+      "verse_key": "1:7",
+      "text": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "sajdah": null,
+      "s_type": null,
+      "juz": 1,
+      "hizb": 1,
+      "rub": 1,
+      "page": 1,
+      "words": [
+        {
+          "id": "27",
+          "wId": 21,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb6b;",
+          "page": "1",
+          "audio": "/001_007_001.mp3",
+          "text": "صِرَاطَ",
+          "translation": {
+            "en": "(The) path",
+            "bn": "(সেই) পথে",
+            "trl": "ṣirāṭa"
+          }
+        },
+        {
+          "id": "28",
+          "wId": 22,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb6c;",
+          "page": "1",
+          "audio": "/001_007_002.mp3",
+          "text": "الَّذِينَ",
+          "translation": {
+            "en": "(of) those",
+            "bn": "যাদেরকে",
+            "trl": "alladhīna"
+          }
+        },
+        {
+          "id": "29",
+          "wId": 23,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb6d;",
+          "page": "1",
+          "audio": "/001_007_003.mp3",
+          "text": "أَنْعَمْتَ",
+          "translation": {
+            "en": "You have bestowed (Your) Favors",
+            "bn": "আপনি অনুগ্রহ দান করেছেন",
+            "trl": "anʿamta"
+          }
+        },
+        {
+          "id": "30",
+          "wId": 24,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb6e;",
+          "page": "1",
+          "audio": "/001_007_004.mp3",
+          "text": "عَلَيْهِمْ",
+          "translation": {
+            "en": "on them",
+            "bn": "তাদের উপর",
+            "trl": "ʿalayhim"
+          }
+        },
+        {
+          "id": "31",
+          "wId": 25,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb6f;",
+          "page": "1",
+          "audio": "/001_007_005.mp3",
+          "text": "غَيْرِ",
+          "translation": {
+            "en": "not (of)",
+            "bn": "নয় (পথ)",
+            "trl": "ghayri"
+          }
+        },
+        {
+          "id": "32",
+          "wId": 26,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb70;",
+          "page": "1",
+          "audio": "/001_007_006.mp3",
+          "text": "الْمَغْضُوبِ",
+          "translation": {
+            "en": "those who earned (Your) wrath",
+            "bn": "অভিশপ্তদের",
+            "trl": "l-maghḍūbi"
+          }
+        },
+        {
+          "id": "33",
+          "wId": 27,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb71;",
+          "page": "1",
+          "audio": "/001_007_007.mp3",
+          "text": "عَلَيْهِمْ",
+          "translation": {
+            "en": "on themselves",
+            "bn": "যাদের উপর (গজব পরেছে)",
+            "trl": "ʿalayhim"
+          }
+        },
+        {
+          "id": "34",
+          "wId": 28,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb72;",
+          "page": "1",
+          "audio": "/001_007_008.mp3",
+          "text": "وَلَا",
+          "translation": {
+            "en": "and not",
+            "bn": "এবং না",
+            "trl": "walā"
+          }
+        },
+        {
+          "id": "35",
+          "wId": 29,
+          "verse_key": "1:7",
+          "char_type": "word",
+          "code": "&#xfb73;",
+          "page": "1",
+          "audio": "/001_007_009.mp3",
+          "text": "الضَّالِّينَ",
+          "translation": {
+            "en": "(of) those who go astray",
+            "bn": "পথভ্রষ্টদের",
+            "trl": "l-ḍālīna"
+          }
+        },
+        {
+          "id": "36",
+          "code": "&#xfb74;",
+          "code_v3": "&#xa007;",
+          "verse_key": "1:7",
+          "char_type": "end"
+        }
+      ]
+    }
+  ]
+}
