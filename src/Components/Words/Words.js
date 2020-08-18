@@ -2,24 +2,8 @@ import React from "react";
 import { Typography, makeStyles } from "@material-ui/core";
 import reactHtmlParser from "react-html-parser";
 
-// Font
-// import MP_0001 from "./fonts/QCF_P001.woff2";
-
-// const raleway = {
-//   fontFamily: "Raleway",
-//   src: `
-//     local('Raleway'),
-//     local('Raleway-Regular'),
-//     url(${MP_0001}) format('woff2')
-//   `,
-// };
-
 const styles = makeStyles((theme) => ({
-  wordWrapper: {
-    direction: "rtl",
-    display: "flex",
-    flexWrap: "wrap",
-  },
+  wordWrapper: { direction: "rtl", display: "flex", flexWrap: "wrap" },
   word: {
     display: "inline-flex",
     textAlign: "center",
@@ -37,18 +21,13 @@ const styles = makeStyles((theme) => ({
     fontFamily: "Uthman Hafs",
   },
 
-  // TextMushaf: (props) => ({
-  //   fontFamily: props.font,
-  // }),
-
-  TextMushaf: {
-    fontFamily: "Mushaf Page",
-  },
+  TextMushaf: (props) => ({
+    fontFamily: props.mushafFont,
+  }),
 }));
 
-const Words = ({ words }) => {
-  // const props = { font: MP_0001 };
-  const classes = styles();
+const Words = ({ words, mushafFont }) => {
+  const classes = styles({ mushafFont: mushafFont });
 
   return (
     <div className={classes.wordWrapper}>

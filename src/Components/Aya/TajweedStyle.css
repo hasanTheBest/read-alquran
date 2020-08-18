@@ -7,20 +7,6 @@
       format("woff");
 }
 
-/* Mushaf */
-@font-face {
-  font-family: "Mushaf Page";
-  src: local("./fonts/QCF_P001"),
-    url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/mushaf-woff2/QCF_P001.woff2)
-      format("woff2"),
-    url(https://cdn.rawgit.com/mustafa0x/qpc-fonts/f93bf5f3/mushaf-woff/QCF_P001.woff)
-      format("woff");
-}
-
-.tajweed {
-  font-family: "Uthman Hafs";
-}
-
 .silent,
 .lam_shamsiyyah,
 .hamzat_wasl {

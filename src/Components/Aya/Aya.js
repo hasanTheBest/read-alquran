@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import WebfontLoader from "@dr-kobros/react-webfont-loader";
 import { makeStyles, Typography } from "@material-ui/core";
 import { suraContext } from "../../Context/SuraContext";
 
@@ -70,7 +71,8 @@ const Aya = () => {
   const value = useContext(suraContext);
   let { sura, suraId, ayaCount, ayaId, trBn, tajweed, textAr } = value;
 
-  let pages = [];
+  let [pages, webFontFamilies, webFontUrls] = [[], [], []];
+
   let p1 = sura.aya[ayaId - 1] && sura.aya[ayaId - 1].page;
   const pLast = sura.aya[ayaCount - 1] && sura.aya[ayaCount - 1].page;
 
@@ -100,84 +102,111 @@ const Aya = () => {
             .map((v) => v);
 
     pages = [...pages, p];
+
+    webFontFamilies.push(`QCF_P${String(p1).padStart(3, 0)}`);
+    webFontUrls.push(`/fonts/QCF_P${String(p1).padStart(3, 0)}.css`);
+
     p1++;
   }
 
-  // console.log("Aya -> pages", pages);
+  const webFontConfig = {
+    custom: {
+      families: webFontFamilies,
+      urls: webFontUrls,
+      timeout: 5000,
+    },
+  };
+
+  const webFontStatus = (status) => {
+    console.log(status);
+  };
+
+  const fontStatus = (s1, s2, s3) => {
+    console.log(s1, s2, s3);
+  };
 
   return (
     <>
       {pages[0] &&
-        pages.map((page, i) => {
+        pages.map((page, pageIndex) => {
           return (
-            <div className={classes.pageContainer} id={`page-${i + 1}`}>
-              {page.map(
-                (
-                  {
-                    a_id,
-                    verse_key,
-                    text,
-                    sajdah,
-                    s_type,
-                    juz,
-                    rub,
-                    page,
-                    words,
-                  },
-                  i
-                ) => {
-                  return (
-                    <div key={a_id.toString()} className={classes.container}>
-                      {/* Words */}
-                      <Words words={words} />
-
-                      <div className={classes.ayaWrapper}>
-                        {/* Aya Arabic */}
-                        <AyaArabic
-                          tajweedRule={
-                            tajweed.aya[Number(verse_key.split(":")[1] - 1)]
-                          }
-                          text={
-                            textAr.aya[Number(verse_key.split(":")[1]) - 1]
-                              ._text
-                          }
-                          index={Number(verse_key.split(":")[1])}
+            <WebfontLoader
+              config={webFontConfig}
+              onStatus={webFontStatus}
+              onFontStatus={fontStatus}
+            >
+              <div className={classes.pageContainer}>
+                {page.map(
+                  (
+                    {
+                      a_id,
+                      verse_key,
+                      text,
+                      sajdah,
+                      s_type,
+                      juz,
+                      rub,
+                      page,
+                      words,
+                    },
+                    i
+                  ) => {
+                    return (
+                      <div key={a_id.toString()} className={classes.container}>
+                        {/* Words */}
+                        <Words
+                          words={words}
+                          mushafFont={`QCF_P${String(page).padStart(3, 0)}`}
                         />
 
-                        {/* Translation Bn */}
-                        <Typography
-                          variant="body1"
-                          color="textSecondary"
-                          component="p"
-                          color="textSecondary"
-                          className={classes.transBn}
-                        >
-                          <span>
-                            {Number(verse_key.split(":")[1]).toLocaleString(
-                              "bn"
-                            )}{" "}
-                            |{" "}
-                          </span>
-                          {trBn.aya[verse_key.split(":")[1] - 1].text}
-                        </Typography>
+                        <div className={classes.ayaWrapper}>
+                          {/* Aya Arabic */}
+                          <AyaArabic
+                            tajweedRule={
+                              tajweed.aya[Number(verse_key.split(":")[1] - 1)]
+                            }
+                            text={
+                              textAr.aya[Number(verse_key.split(":")[1]) - 1]
+                                ._text
+                            }
+                            index={Number(verse_key.split(":")[1])}
+                          />
 
-                        {/* Transliteration */}
-                        {/* <Typography variant="body1" color="textSecondary" component="p">
+                          {/* Translation Bn */}
+                          <Typography
+                            variant="body1"
+                            color="textSecondary"
+                            component="p"
+                            color="textSecondary"
+                            className={classes.transBn}
+                          >
+                            <span>
+                              {Number(verse_key.split(":")[1]).toLocaleString(
+                                "bn"
+                              )}{" "}
+                              |{" "}
+                            </span>
+                            {trBn.aya[verse_key.split(":")[1] - 1].text}
+                          </Typography>
+
+                          {/* Transliteration */}
+                          {/* <Typography variant="body1" color="textSecondary" component="p">
                   <span>{a_id.toLocaleString("en")} | </span>
                   {Boolean(trlEn.aya) && trlEn.aya[i].text}
                 </Typography> */}
 
-                        {/* Translation En */}
-                        {/* <Typography variant="body1" color="textSecondary" component="p">
+                          {/* Translation En */}
+                          {/* <Typography variant="body1" color="textSecondary" component="p">
                   <span>{a_id.toLocaleString("en")} | </span>
                   {Boolean(trEn.aya) && trEn.aya[i].text}
                 </Typography> */}
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-              )}
-            </div>
+                    );
+                  }
+                )}
+              </div>
+            </WebfontLoader>
           );
         })}
     </>
