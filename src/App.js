@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./Containers/Home";
 import Sura from "./Containers/Sura";
-import SuraContext from "./Context/SuraContext";
+import SettingProvider from "./Context/SettingsContext";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 
@@ -46,19 +46,21 @@ function App() {
     <MuiThemeProvider theme={teal}>
       <div className="App">
         <Router>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
+          <SettingProvider>
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
 
-            <Route path="/sura/:suraId" exact>
-              <Sura />
-            </Route>
+              <Route path="/sura/:suraId" exact>
+                <Sura />
+              </Route>
 
-            {/* <Route path="/sura:suraId" exact>
+              {/* <Route path="/sura:suraId" exact>
               <SuraContext />
             </Route> */}
-          </Switch>
+            </Switch>
+          </SettingProvider>
         </Router>
       </div>
     </MuiThemeProvider>

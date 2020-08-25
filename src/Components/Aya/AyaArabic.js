@@ -1,15 +1,20 @@
 import React from "react";
+import { SettingContext } from "../../Context/SettingsContext";
 import { Typography, makeStyles } from "@material-ui/core";
+import { tajweedMarker } from "../../Helper/helper";
 import reactHtmlParser from "react-html-parser";
+import WebfontLoader from "@dr-kobros/react-webfont-loader";
 
 const styles = makeStyles((theme) => ({
-  ayahContainer: {
+  ayahContainer: ({ fontSizeArabic, selectItemFont }) => ({
     direction: "rtl",
-    fontFamily: "inherit",
+    fontFamily:
+      selectItemFont === "Old Madina Mushaf" ? "Uthmanic Hafs" : selectItemFont,
+    fontSize: fontSizeArabic,
     fontWeight: 600,
     padding: ".8rem .5rem",
     margin: ".5rem 0",
-  },
+  }),
   ayahNumberHafs: {
     fontFamily: "inherit",
     fontWeight: 400,
@@ -17,25 +22,13 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const tajweedMarker = (rule, text) => {
-  let textSplitted = text.split("");
-
-  rule.annotations.forEach(({ start, rule, end }, i) => {
-    textSplitted[start] = textSplitted[start].includes("</span>")
-      ? textSplitted[start].replace(
-          "</span>",
-          `</span><span class=${rule} title=${rule}>`
-        )
-      : `<span class=${rule} title=${rule}>` + textSplitted[start];
-
-    textSplitted[end] = `</span>` + textSplitted[end];
-  });
-
-  return textSplitted.join("");
-};
-
 const AyaArabic = ({ tajweedRule, text, index }) => {
-  const classes = styles();
+  const { fontSizeArabic, selectItemFont } = React.useContext(SettingContext);
+  const classes = styles({ fontSizeArabic, selectItemFont });
+
+  // let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/UthmanicHafs1.css`]];
+  // families.push(selectItemFont);
+  // urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
 
   return (
     <>
@@ -45,7 +38,9 @@ const AyaArabic = ({ tajweedRule, text, index }) => {
         component="h5"
         className={classes.ayahContainer}
       >
-        {reactHtmlParser(tajweedMarker(tajweedRule, text))}
+        {tajweedRule
+          ? reactHtmlParser(tajweedMarker(tajweedRule, text))
+          : reactHtmlParser(text)}
         <Typography
           variant="h3"
           color="textPrimary"

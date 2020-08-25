@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   makeStyles,
   Typography,
@@ -7,8 +8,10 @@ import {
   InputLabel,
   Link,
   MenuItem,
+  Hidden,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import Drawer from "../Header/Drawer/Drawer";
 
 import suraMeta from "../SuraInfo/data/suraMeta.json";
 import Bismillah from "./Bismillah";
@@ -51,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 // Sura Meta
 const ExploreSuraMeta = ({ info, id }) => {
   const classes = useStyles();
+
   const { index, ayas, start, name, tname, ename, type, order, rukus } = info[
     id - 1
   ];
@@ -170,9 +174,12 @@ const SelectAya = ({ aya }) => {
 // Sura info
 const SuraInfo = ({ suraId }) => {
   const classes = useStyles();
+  // let { pathname } = useLocation();
 
   return (
     <>
+      {/* <Hidden mdDown>{pathname.startsWith("/sura") && <Drawer />}</Hidden> */}
+
       <div className={classes.bannerSuraInfo}>
         <ExploreSuraMeta info={suraMeta.suras.sura} id={suraId} />
 

@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import WebfontLoader from "@dr-kobros/react-webfont-loader";
-import { makeStyles, Typography } from "@material-ui/core";
+import reactHtmlParser from "react-html-parser";
+import { makeStyles, Typography, Hidden } from "@material-ui/core";
+import { SettingContext } from "../../Context/SettingsContext";
 import { suraContext } from "../../Context/SuraContext";
 
 // Color
@@ -15,12 +18,22 @@ import borderClip from "./border.png";
 
 import Words from "../Words/Words";
 import AyaArabic from "./AyaArabic";
+import Drawer from "../Header/Drawer/Drawer";
+import { pageByPage } from "../../Helper/helper";
 
 const styles = makeStyles((theme) => ({
+  suraCompoWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    "& .MuiDrawer-paper": {
+      position: "relative",
+    },
+  },
   container: {
     fontFamily: "Uthman Hafs",
     maxWidth: 700,
-    margin: "0 auto",
+    width: "100%",
+    // margin: "0 auto",
     padding: "1.5rem 1rem",
     // border: `2px solid ${theme.palette.primary.light}`,
     // borderRadius: theme.shape.borderRadius,
@@ -36,7 +49,7 @@ const styles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: 700,
     borderImage: `url(${borderClip}) 30 stretch`,
-    margin: "1rem auto",
+    // margin: "1rem auto",
     padding: ".8rem",
   },
 
@@ -60,156 +73,212 @@ const styles = makeStyles((theme) => ({
   },
 
   transBn: {
-    fontSize: "1.2rem",
+    fontSize: ({ fontSizeTranslation }) => fontSizeTranslation,
     letterSpacing: 1,
     padding: ".5rem",
+  },
+  ayaWrodTextWrapper: {
+    direction: "rtl",
+    textAlign: "right",
+    paddingTop: ".5rem",
+  },
+  ayaWordText: {
+    fontSize: ({ fontSizeArabic }) => fontSizeArabic,
+    display: "inline-block",
+    lineHeight: 1.6,
   },
 }));
 
 const Aya = () => {
-  const classes = styles();
-  const value = useContext(suraContext);
-  let { sura, suraId, ayaCount, ayaId, trBn, tajweed, textAr } = value;
+  const {
+    showWbw,
+    showAya,
+    showTranslation,
+    showTransliteration,
+    showTajweed,
+    fontSizeTranslation,
+    fontSizeArabic,
+    selectItemFont,
+  } = useContext(SettingContext);
+  const { sura, suraId, ayaCount, ayaId, trBn, tajweed, textAr } = useContext(
+    suraContext
+  );
 
-  let [pages, webFontFamilies, webFontUrls] = [[], [], []];
+  const classes = styles({ fontSizeTranslation, fontSizeArabic });
 
-  let p1 = sura.aya[ayaId - 1] && sura.aya[ayaId - 1].page;
-  const pLast = sura.aya[ayaCount - 1] && sura.aya[ayaCount - 1].page;
+  const { pages, webFontConfig, webFontStatus, fontStatus } = pageByPage(
+    sura,
+    suraId,
+    ayaCount,
+    ayaId
+  );
 
-  // If verse_key present
-  if (ayaId) {
-    sura.aya2 = sura.aya.slice(ayaId - 1);
-  }
+  let { pathname } = useLocation();
 
-  // Divide into page
-  while (p1 <= pLast) {
-    let ayaNum = sura.aya[0].verse_key;
-    ayaNum = Number(ayaNum.split(":")[1]);
-
-    let p =
-      Boolean(p1) && ayaId === ayaNum
-        ? sura.aya
-            .filter(
-              ({ page, verse_key }) =>
-                p1 === page && suraId.suraId === verse_key.split(":")[0]
-            )
-            .map((v) => v)
-        : sura.aya2
-            .filter(
-              ({ page, verse_key }) =>
-                p1 === page && suraId.suraId === verse_key.split(":")[0]
-            )
-            .map((v) => v);
-
-    pages = [...pages, p];
-
-    webFontFamilies.push(`QCF_P${String(p1).padStart(3, 0)}`);
-    webFontUrls.push(`/fonts/QCF_P${String(p1).padStart(3, 0)}.css`);
-
-    p1++;
-  }
-
-  const webFontConfig = {
-    custom: {
-      families: webFontFamilies,
-      urls: webFontUrls,
-      timeout: 5000,
-    },
-  };
-
-  const webFontStatus = (status) => {
-    console.log(status);
-  };
-
-  const fontStatus = (s1, s2, s3) => {
-    console.log(s1, s2, s3);
-  };
+  let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/UthmanicHafs1.css`]];
+  families.push(selectItemFont);
+  urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
 
   return (
-    <>
-      {pages[0] &&
-        pages.map((page, pageIndex) => {
-          return (
-            <WebfontLoader
-              config={webFontConfig}
-              onStatus={webFontStatus}
-              onFontStatus={fontStatus}
-            >
-              <div className={classes.pageContainer}>
-                {page.map(
-                  (
-                    {
-                      a_id,
-                      verse_key,
-                      text,
-                      sajdah,
-                      s_type,
-                      juz,
-                      rub,
-                      page,
-                      words,
-                    },
-                    i
-                  ) => {
-                    return (
-                      <div key={a_id.toString()} className={classes.container}>
-                        {/* Words */}
-                        <Words
-                          words={words}
-                          mushafFont={`QCF_P${String(page).padStart(3, 0)}`}
-                        />
-
-                        <div className={classes.ayaWrapper}>
-                          {/* Aya Arabic */}
-                          <AyaArabic
-                            tajweedRule={
-                              tajweed.aya[Number(verse_key.split(":")[1] - 1)]
-                            }
-                            text={
-                              textAr.aya[Number(verse_key.split(":")[1]) - 1]
-                                ._text
-                            }
-                            index={Number(verse_key.split(":")[1])}
-                          />
-
-                          {/* Translation Bn */}
-                          <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            component="p"
-                            color="textSecondary"
-                            className={classes.transBn}
+    <div className={classes.suraCompoWrapper}>
+      <div>
+        <Hidden className="custom-brk" mdDown>
+          {pathname.startsWith("/sura") && <Drawer />}
+        </Hidden>
+      </div>
+      <div>
+        <WebfontLoader
+          config={{
+            custom: {
+              families: families,
+              urls: urls,
+            },
+          }}
+        >
+          {pages[0] &&
+            pages.map((page, pageIndex) => {
+              return (
+                <WebfontLoader
+                  config={webFontConfig}
+                  onStatus={webFontStatus}
+                  onFontStatus={fontStatus}
+                >
+                  <div className={classes.pageContainer}>
+                    {page.map(
+                      (
+                        {
+                          a_id,
+                          verse_key,
+                          text,
+                          sajdah,
+                          s_type,
+                          juz,
+                          rub,
+                          page,
+                          words,
+                        },
+                        i
+                      ) => {
+                        return (
+                          <div
+                            key={a_id.toString()}
+                            className={classes.container}
                           >
-                            <span>
-                              {Number(verse_key.split(":")[1]).toLocaleString(
-                                "bn"
-                              )}{" "}
-                              |{" "}
-                            </span>
-                            {trBn.aya[verse_key.split(":")[1] - 1].text}
-                          </Typography>
+                            {/* Words */}
+                            {showWbw &&
+                            selectItemFont === "Old Madina Mushaf" ? (
+                              <Words
+                                words={words}
+                                mushafFont={`QCF_P${String(page).padStart(
+                                  3,
+                                  0
+                                )}`}
+                              />
+                            ) : (
+                              <Words
+                                ayaNum={Number(verse_key.split(":")[1])}
+                                words={words}
+                                mushafFont={null}
+                              />
+                            )}
 
-                          {/* Transliteration */}
-                          {/* <Typography variant="body1" color="textSecondary" component="p">
-                  <span>{a_id.toLocaleString("en")} | </span>
-                  {Boolean(trlEn.aya) && trlEn.aya[i].text}
-                </Typography> */}
+                            <div className={classes.ayaWrapper}>
+                              {/* Aya Arabic */}
+                              {showAya &&
+                                "Old Madina Mushaf" !== selectItemFont &&
+                                (showTajweed ? (
+                                  <AyaArabic
+                                    tajweedRule={
+                                      tajweed.aya[
+                                        Number(verse_key.split(":")[1] - 1)
+                                      ]
+                                    }
+                                    text={
+                                      textAr.aya[
+                                        Number(verse_key.split(":")[1]) - 1
+                                      ]._text
+                                    }
+                                    index={Number(verse_key.split(":")[1])}
+                                  />
+                                ) : (
+                                  <AyaArabic
+                                    tajweedRule={null}
+                                    text={text}
+                                    index={Number(verse_key.split(":")[1])}
+                                  />
+                                ))}
 
-                          {/* Translation En */}
-                          {/* <Typography variant="body1" color="textSecondary" component="p">
+                              {/*Aya for Old Madina Mushaf */}
+                              {selectItemFont === "Old Madina Mushaf" && (
+                                <div className={classes.ayaWrodTextWrapper}>
+                                  {words.map(({ id, code }) => (
+                                    <Typography
+                                      variant="h3"
+                                      component="b"
+                                      className={classes.ayaWordText}
+                                      style={{
+                                        fontFamily: `QCF_P${String(
+                                          page
+                                        ).padStart(3, 0)}`,
+                                      }}
+                                      key={String(id)}
+                                    >
+                                      {reactHtmlParser(code)}
+                                    </Typography>
+                                  ))}
+                                </div>
+                              )}
+
+                              {/* Transliteration */}
+                              {showTransliteration && (
+                                <Typography
+                                  variant="body1"
+                                  color="textSecondary"
+                                  component="p"
+                                >
+                                  <span>{a_id.toLocaleString("en")} | </span>
+                                  {/* {Boolean(trlEn) && trlEn.aya[i].text} */}
+                                </Typography>
+                              )}
+
+                              {/* Translation Bn */}
+                              {showTranslation && (
+                                <>
+                                  <Typography
+                                    variant="body1"
+                                    color="textSecondary"
+                                    component="p"
+                                    color="textSecondary"
+                                    className={classes.transBn}
+                                  >
+                                    <span>
+                                      {Number(
+                                        verse_key.split(":")[1]
+                                      ).toLocaleString("bn")}{" "}
+                                      |{" "}
+                                    </span>
+                                    {trBn.aya[verse_key.split(":")[1] - 1].text}
+                                  </Typography>
+
+                                  {/* Translation En */}
+                                  {/* <Typography variant="body1" color="textSecondary" component="p">
                   <span>{a_id.toLocaleString("en")} | </span>
                   {Boolean(trEn.aya) && trEn.aya[i].text}
                 </Typography> */}
-                        </div>
-                      </div>
-                    );
-                  }
-                )}
-              </div>
-            </WebfontLoader>
-          );
-        })}
-    </>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </WebfontLoader>
+              );
+            })}
+        </WebfontLoader>
+      </div>
+    </div>
   );
 };
 

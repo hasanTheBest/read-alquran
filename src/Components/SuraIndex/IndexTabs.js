@@ -23,6 +23,7 @@ import sajdasMeta from "./data/sajdasMeta.json";
 const useStyles = makeStyles((theme) => ({
   secondaryLight: {
     backgroundColor: theme.palette.primary.light,
+    zIndex: theme.zIndex.drawer - 1,
   },
   justifyCenter: {
     justifyContent: "center",
