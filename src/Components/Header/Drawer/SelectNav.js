@@ -33,8 +33,9 @@ const SelectNav = () => {
   const classes = useStyles();
   const {
     selectItemFont,
-    selectItemRecitation,
-    selectItemTranslation,
+    ayaTranslation,
+    ayaRecitation,
+    wordTranslation,
     setSelectItemValue,
   } = React.useContext(SettingContext);
 
@@ -54,6 +55,7 @@ const SelectNav = () => {
 
   return (
     <Box p={2}>
+      {/* Font */}
       <div className={classes.selectEachWrapper}>
         <Typography variant="body1" component="span">
           Font
@@ -69,42 +71,39 @@ const SelectNav = () => {
               id: "font-native-required",
             }}
           >
-            <optgroup label="Word">
-              <option value="Old Madina Mushaf">Old Madina Mushaf</option>
-            </optgroup>
-            <optgroup label="Aya">
-              <option value="Nafees Nastaleeq">Nafees Nastaleeq</option>
-              <option value="Noore Hidayat">Noore Hidayat</option>
-              <option value="me_quran">me_quran</option>
-              <option value="Uthmanic Hafs">Uthmanic Hafs</option>
-              <option value="Uthmanic TN">Uthmanic TN</option>
-            </optgroup>
+            <option value="Old Madina Mushaf">Old Madina Mushaf</option>
+            <option value="Nafees Nastaleeq">Nafees Nastaleeq</option>
+            <option value="Noore Hidayat">Noore Hidayat</option>
+            <option value="me_quran">me_quran</option>
+            <option value="Uthmanic Hafs">Uthmanic Hafs</option>
+            <option value="Uthmanic TN">Uthmanic TN</option>
           </Select>
         </FormControl>
       </div>
 
+      {/* Word Translation */}
       <div className={classes.selectEachWrapper}>
         <Typography variant="body1" component="span">
-          Recitation
+          Translation (Word)
         </Typography>
 
         <FormControl required className={classes.formControl}>
           <Select
             native
-            value={selectItemRecitation}
+            value={wordTranslation}
             onChange={handleChangeOnSelect}
-            name="recitation"
+            name="wordTranslation"
             inputProps={{
-              id: "recitation-native-required",
+              id: "word-translation-native-required",
             }}
           >
-            <option value={10}>TenTenTenTenTenTenTen</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            <option value="word-tr-bangla">Bangla</option>
+            <option value="word-tr-english">English</option>
           </Select>
         </FormControl>
       </div>
 
+      {/* Translation */}
       <div className={classes.selectEachWrapper}>
         <Typography variant="body1" component="span">
           Translation
@@ -113,7 +112,7 @@ const SelectNav = () => {
         <FormControl required className={classes.formControl}>
           <NativeSelect
             native
-            value={selectItemTranslation}
+            value={ayaTranslation}
             onChange={handleChangeOnSelect}
             name="translation"
             inputProps={{
@@ -121,13 +120,41 @@ const SelectNav = () => {
             }}
           >
             <optgroup label="Default">
-              <option value={10}>TenTenTenTenTenTenTen</option>
+              <option value="Mojibor Rahman">Mojibor Rahman(Bangla)</option>
+              <option value="Saheeh International">
+                Saheeh International(English)
+              </option>
             </optgroup>
             <optgroup label="Others">
-              <option value={20}>Twenty</option>
-              <option value={30}>Thirty</option>
+              <option value="Urdu">Urdu</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Dutch">Dutch</option>
             </optgroup>
           </NativeSelect>
+        </FormControl>
+      </div>
+
+      {/* Recitation */}
+      <div className={classes.selectEachWrapper}>
+        <Typography variant="body1" component="span">
+          Recitation
+        </Typography>
+
+        <FormControl required className={classes.formControl}>
+          <Select
+            native
+            value={ayaRecitation}
+            onChange={handleChangeOnSelect}
+            name="recitation"
+            inputProps={{
+              id: "recitation-native-required",
+            }}
+          >
+            <option value="Mishr Al Afasy">Mishr Al Afasy</option>
+            <option value="Omar Hisham Farabi">Omar Hisham Farabi</option>
+            <option value="Hasan Gul">Hasan Gul</option>
+          </Select>
         </FormControl>
       </div>
     </Box>

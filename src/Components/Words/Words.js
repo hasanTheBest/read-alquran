@@ -43,6 +43,7 @@ const Words = ({ words, mushafFont, ayaNum }) => {
     fontSizeArabic,
     fontSizeTranslation,
     selectItemFont,
+    wordTranslation,
   } = React.useContext(SettingContext);
   const classes = styles({
     mushafFont,
@@ -76,39 +77,41 @@ const Words = ({ words, mushafFont, ayaNum }) => {
                     {mushafFont ? reactHtmlParser(code) : text}
                   </Typography>
 
-                  {char_type === "word" && (
-                    <>
-                      {/* <span className={classes.textArabic}>{text && text}</span> */}
-
-                      {showWbwTranslation && (
-                        <>
-                          <Typography
-                            variant="body1"
-                            color="textSecondary"
-                            component="span"
-                            className={classes.wordTranslation}
-                          >
-                            {Boolean(trans) && trans.bn}
-                          </Typography>
-
-                          {/* <Typography
+                  {/* Transliteration */}
+                  {showWbwTransliteration && (
+                    <Typography
                       variant="body1"
                       color="textSecondary"
                       component="span"
                     >
-                      {Boolean(trans) && trans.en}
-                    </Typography> */}
-                        </>
-                      )}
+                      {Boolean(trans) && trans.trl}
+                    </Typography>
+                  )}
 
-                      {showWbwTransliteration && (
-                        <Typography
-                          variant="body1"
-                          color="textSecondary"
-                          component="span"
-                        >
-                          {Boolean(trans) && trans.trl}
-                        </Typography>
+                  {/* Translation */}
+                  {char_type === "word" && (
+                    <>
+                      {showWbwTranslation && (
+                        <>
+                          {wordTranslation === "word-tr-bangla" ? (
+                            <Typography
+                              variant="body1"
+                              color="textSecondary"
+                              component="span"
+                              className={classes.wordTranslation}
+                            >
+                              {Boolean(trans) && trans.bn}
+                            </Typography>
+                          ) : (
+                            <Typography
+                              variant="body1"
+                              color="textSecondary"
+                              component="span"
+                            >
+                              {Boolean(trans) && trans.en}
+                            </Typography>
+                          )}
+                        </>
                       )}
                     </>
                   )}
@@ -116,16 +119,20 @@ const Words = ({ words, mushafFont, ayaNum }) => {
               </React.Fragment>
             );
           })}
-        <Typography
-          variant="h5"
-          color="textPrimary"
-          component="div"
-          className={classes.word}
-        >
-          <Typography variant="h3" component="b" className={classes.TextWord}>
-            {ayaNum.toLocaleString("ar-EG")}
+
+        {/* Aya Mark */}
+        {"Old Madina Mushaf" !== selectItemFont && (
+          <Typography
+            variant="h5"
+            color="textPrimary"
+            component="div"
+            className={classes.word}
+          >
+            <Typography variant="h3" component="b" className={classes.TextWord}>
+              {ayaNum.toLocaleString("ar-EG")}
+            </Typography>
           </Typography>
-        </Typography>
+        )}
       </div>
     </>
   );

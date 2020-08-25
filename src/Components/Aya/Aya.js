@@ -91,6 +91,17 @@ const styles = makeStyles((theme) => ({
 
 const Aya = () => {
   const {
+    sura,
+    suraId,
+    ayaCount,
+    ayaId,
+    trBn,
+    trEn,
+    trlEn,
+    tajweed,
+    textAr,
+  } = useContext(suraContext);
+  const {
     showWbw,
     showAya,
     showTranslation,
@@ -99,10 +110,8 @@ const Aya = () => {
     fontSizeTranslation,
     fontSizeArabic,
     selectItemFont,
+    ayaTranslation,
   } = useContext(SettingContext);
-  const { sura, suraId, ayaCount, ayaId, trBn, tajweed, textAr } = useContext(
-    suraContext
-  );
 
   const classes = styles({ fontSizeTranslation, fontSizeArabic });
 
@@ -168,6 +177,7 @@ const Aya = () => {
                             {showWbw &&
                             selectItemFont === "Old Madina Mushaf" ? (
                               <Words
+                                ayaNum={Number(verse_key.split(":")[1])}
                                 words={words}
                                 mushafFont={`QCF_P${String(page).padStart(
                                   3,
@@ -235,36 +245,55 @@ const Aya = () => {
                                   variant="body1"
                                   color="textSecondary"
                                   component="p"
+                                  className={classes.transBn}
                                 >
-                                  <span>{a_id.toLocaleString("en")} | </span>
-                                  {/* {Boolean(trlEn) && trlEn.aya[i].text} */}
+                                  <span>
+                                    {Number(
+                                      verse_key.split(":")[1]
+                                    ).toLocaleString("en")}{" "}
+                                    .{" "}
+                                  </span>
+                                  {Boolean(trlEn) && trlEn.aya[i].text}
                                 </Typography>
                               )}
 
-                              {/* Translation Bn */}
+                              {/* Translation*/}
                               {showTranslation && (
                                 <>
-                                  <Typography
-                                    variant="body1"
-                                    color="textSecondary"
-                                    component="p"
-                                    color="textSecondary"
-                                    className={classes.transBn}
-                                  >
-                                    <span>
-                                      {Number(
-                                        verse_key.split(":")[1]
-                                      ).toLocaleString("bn")}{" "}
-                                      |{" "}
-                                    </span>
-                                    {trBn.aya[verse_key.split(":")[1] - 1].text}
-                                  </Typography>
-
-                                  {/* Translation En */}
-                                  {/* <Typography variant="body1" color="textSecondary" component="p">
-                  <span>{a_id.toLocaleString("en")} | </span>
-                  {Boolean(trEn.aya) && trEn.aya[i].text}
-                </Typography> */}
+                                  {"Mojibor Rahman" === ayaTranslation ? (
+                                    <Typography
+                                      variant="body1"
+                                      color="textSecondary"
+                                      component="p"
+                                      className={classes.transBn}
+                                    >
+                                      <span>
+                                        {Number(
+                                          verse_key.split(":")[1]
+                                        ).toLocaleString("bn")}{" "}
+                                        |{" "}
+                                      </span>
+                                      {
+                                        trBn.aya[verse_key.split(":")[1] - 1]
+                                          .text
+                                      }
+                                    </Typography>
+                                  ) : (
+                                    <Typography
+                                      variant="body1"
+                                      color="textSecondary"
+                                      component="p"
+                                      className={classes.transBn}
+                                    >
+                                      <span>
+                                        {Number(
+                                          verse_key.split(":")[1]
+                                        ).toLocaleString("en")}{" "}
+                                        .{" "}
+                                      </span>
+                                      {Boolean(trEn.aya) && trEn.aya[i].text}
+                                    </Typography>
+                                  )}
                                 </>
                               )}
                             </div>

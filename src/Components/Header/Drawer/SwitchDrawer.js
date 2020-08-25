@@ -79,7 +79,7 @@ export default function SwitchLabels() {
             <Switch
               checked={showTranslation}
               onChange={handleChange}
-              name="translation"
+              name="showTranslation"
               color="primary"
             />
           }
@@ -90,7 +90,7 @@ export default function SwitchLabels() {
             <Switch
               checked={showTransliteration}
               onChange={handleChange}
-              name="transliteration"
+              name="showTransliteration"
               color="primary"
             />
           }

@@ -6,17 +6,27 @@ export const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
   const [state, setState] = useState({
+    mobileOpen: false,
+
+    // Switch
     wbw: true,
     wbwTransliteration: false,
     wbwTranslation: true,
-    showTajweed: true,
+
     showAya: true,
-    translation: true,
-    transliteration: false,
+    showTajweed: true,
+    showTranslation: true,
+    showTransliteration: false,
+
+    // Slider
     fontSizeAr: 32,
     fontSizeTr: 18,
+
+    // Select
     font: "Uthmanic Hafs",
-    mobileOpen: false,
+    translation: "Mojibor Rahman",
+    wordTranslation: "word-tr-bangla",
+    recitation: "Omar Hisham Farabi",
   });
 
   const settings = {
@@ -25,8 +35,8 @@ const SettingProvider = ({ children }) => {
     showWbwTransliteration: state.wbwTransliteration,
     showTajweed: state.showTajweed,
     showAya: state.showAya,
-    showTranslation: state.translation,
-    showTransliteration: state.transliteration,
+    showTranslation: state.showTranslation,
+    showTransliteration: state.showTransliteration,
     setSwitchValue: (e) =>
       setState({ ...state, [e.target.name]: e.target.checked }),
 
@@ -44,9 +54,9 @@ const SettingProvider = ({ children }) => {
     },
 
     selectItemFont: state.font,
-    // selectItemRecitation: state./,
-    // selectItemTranslation: state.font,
-    // selectItemName: state.name,
+    wordTranslation: state.wordTranslation,
+    ayaTranslation: state.translation,
+    ayaRecitation: state.recitation,
     setSelectItemValue: (event, name) =>
       setState({
         ...state,

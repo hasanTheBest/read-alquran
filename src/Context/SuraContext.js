@@ -16,20 +16,33 @@ const SuraContext = ({ children }) => {
 
   // const suraId = useParams();
   const sura = useSuspenseFetch("arabic", suraId.suraId);
-  const trBn = useSuspenseFetch("translation/an_bn_mujibor", suraId.suraId);
-  const tajweed = useSuspenseFetch("tajweedRule", suraId.suraId);
   const textAr = useSuspenseFetch("arabic/textAr", suraId.suraId);
+  const tajweed = useSuspenseFetch("tajweedRule", suraId.suraId);
+  const trBn = useSuspenseFetch("translation/an_bn_mujibor", suraId.suraId);
+  const trEn = useSuspenseFetch("translation/an_en_shahih", suraId.suraId);
+  const trlEn = useSuspenseFetch(
+    "translation/an_en_transliteration",
+    suraId.suraId
+  );
 
   //useFetch
 
   const value = {
-    sura: sura,
-    trBn: trBn,
-    tajweed: tajweed,
     suraId: suraId,
     ayaId: Number(suraId.ayaId) ? Number(suraId.ayaId) : 1,
     ayaCount: sura.aya.length,
-    textAr: textAr,
+    sura,
+    textAr,
+    tajweed,
+    trBn,
+    trEn,
+    trlEn,
+    // sura: sura,
+    // textAr: textAr,
+    // tajweed: tajweed,
+    // trBn: trBn,
+    // trEn: trEn,
+    // trlEn: trlEn,
   };
 
   return <suraContext.Provider value={value}>{children}</suraContext.Provider>;
