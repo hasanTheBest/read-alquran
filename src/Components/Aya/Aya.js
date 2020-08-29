@@ -124,9 +124,10 @@ const Aya = () => {
 
   let { pathname } = useLocation();
 
-  let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/UthmanicHafs1.css`]];
+  let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/custom-font.css`]];
   families.push(selectItemFont);
-  urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
+  // let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/Uthmanic-Hafs.css`]];
+  // urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
 
   return (
     <div className={classes.suraCompoWrapper}>

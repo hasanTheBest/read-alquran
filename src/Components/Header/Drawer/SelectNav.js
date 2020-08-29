@@ -71,12 +71,15 @@ const SelectNav = () => {
               id: "font-native-required",
             }}
           >
-            <option value="Old Madina Mushaf">Old Madina Mushaf</option>
-            <option value="Nafees Nastaleeq">Nafees Nastaleeq</option>
-            <option value="Noore Hidayat">Noore Hidayat</option>
-            <option value="me_quran">me_quran</option>
             <option value="Uthmanic Hafs">Uthmanic Hafs</option>
+            <option value="me_quran">me_quran</option>
             <option value="Uthmanic TN">Uthmanic TN</option>
+            <option value="KFGQPC Uthman Taha Naskh">
+              KFGQPC Uthman Taha Naskh
+            </option>
+            <option value="Old Madina Mushaf">Old Madina Mushaf</option>
+            <option value="Noore Hidayat">Noore Hidayat</option>
+            <option value="Nafees Nastaleeq">Nafees Nastaleeq</option>
           </Select>
         </FormControl>
       </div>
