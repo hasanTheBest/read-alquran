@@ -1,42 +1,47 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import WebfontLoader from "@dr-kobros/react-webfont-loader";
-import reactHtmlParser from "react-html-parser";
-import { makeStyles, Typography, Hidden } from "@material-ui/core";
+
+// Context
 import { SettingContext } from "../../Context/SettingsContext";
 import { suraContext } from "../../Context/SuraContext";
+import { IndexContext } from "../../Context/IndexContext";
+
+// Material UI Components
+import { makeStyles, Hidden, Box, Container } from "@material-ui/core";
+
+// Data
+import juzMeta from "../SuraIndex/data/juzMeta.json";
+import suraList from "../SuraInfo/data/suraMeta.json";
+
+// Components
+import Words from "../Words/Words";
+import AyaArabic from "./AyaArabic";
+import Drawer from "../Header/Drawer/Drawer";
+import { pageByPage } from "../../Helper/helper";
+import PageMetaBarTop from "../Aya/PageMetaBarTop";
+import PageMetaBarBottom from "../Aya/PageMetaBarBottom";
+import AyaTransliteration from "./trans/AyaTransliteration";
+import AyaTranslation from "./trans/AyaTranslation";
+import GenerateAyaFromWords from "./GenerateAyaFromWords";
 
 // Color
 import tajweedStyle from "./TajweedStyle.css";
 import teal from "@material-ui/core/colors/teal";
 import borderClip from "./border.png";
 
-// Components
-// import trBn from "./trans/bn/1.json";
-// import trEn from "./trans/en/1.json";
-// import trlEn from "./trans/trl/1.json";
-
-import Words from "../Words/Words";
-import AyaArabic from "./AyaArabic";
-import Drawer from "../Header/Drawer/Drawer";
-import { pageByPage } from "../../Helper/helper";
-
 const styles = makeStyles((theme) => ({
   suraCompoWrapper: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     "& .MuiDrawer-paper": {
       position: "relative",
     },
   },
+
   container: {
-    fontFamily: "Uthman Hafs",
-    maxWidth: 700,
-    width: "100%",
-    // margin: "0 auto",
     padding: "1.5rem 1rem",
-    // border: `2px solid ${theme.palette.primary.light}`,
-    // borderRadius: theme.shape.borderRadius,
     backgroundColor: theme.palette.background.paper,
     backgroundColor: teal[50],
     "&:nth-child(odd)": {
@@ -45,75 +50,29 @@ const styles = makeStyles((theme) => ({
   },
 
   pageContainer: {
-    border: ".5rem solid transparent",
+    border: "1.5rem solid teal",
     width: "100%",
-    maxWidth: 700,
-    borderImage: `url(${borderClip}) 30 stretch`,
-    // margin: "1rem auto",
-    padding: ".8rem",
-  },
-
-  endAyah: {
-    display: "inline",
-    position: "relative",
-    marginRight: "10px",
-  },
-  ayahSign: {
-    fontFamily: "inherit",
-  },
-
-  ayahNumber: {
-    display: "inline",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    fontFamily: "inherit",
-    // fontSize: "12px",
-    transform: "translate(-50%, -40%)",
-  },
-
-  transBn: {
-    fontSize: ({ fontSizeTranslation }) => fontSizeTranslation,
-    letterSpacing: 1,
-    padding: ".5rem",
-  },
-  ayaWrodTextWrapper: {
-    direction: "rtl",
-    textAlign: "right",
-    paddingTop: ".5rem",
-  },
-  ayaWordText: {
-    fontSize: ({ fontSizeArabic }) => fontSizeArabic,
-    display: "inline-block",
-    lineHeight: 1.6,
+    borderImage: `url(${borderClip}) 30 repeat`,
   },
 }));
 
 const Aya = () => {
-  const {
-    sura,
-    suraId,
-    ayaCount,
-    ayaId,
-    trBn,
-    trEn,
-    trlEn,
-    tajweed,
-    textAr,
-  } = useContext(suraContext);
   const {
     showWbw,
     showAya,
     showTranslation,
     showTransliteration,
     showTajweed,
-    fontSizeTranslation,
     fontSizeArabic,
     selectItemFont,
-    ayaTranslation,
   } = useContext(SettingContext);
+  const { sura, suraId, ayaCount, ayaId, tajweed, textAr } = useContext(
+    suraContext
+  );
 
-  const classes = styles({ fontSizeTranslation, fontSizeArabic });
+  // const { suraList, juzMeta } = useContext(IndexContext);
+
+  const classes = styles({ fontSizeArabic });
 
   const { pages, webFontConfig, webFontStatus, fontStatus } = pageByPage(
     sura,
@@ -124,52 +83,44 @@ const Aya = () => {
 
   let { pathname } = useLocation();
 
-  let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/custom-font.css`]];
+  let families = ["Uthamanic Hafs"];
   families.push(selectItemFont);
-  // let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/Uthmanic-Hafs.css`]];
-  // urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
 
   return (
     <div className={classes.suraCompoWrapper}>
-      <div>
+      <div className={classes.mdUpDrawerAside}>
         <Hidden className="custom-brk" mdDown>
           {pathname.startsWith("/sura") && <Drawer />}
         </Hidden>
       </div>
-      <div>
-        <WebfontLoader
-          config={{
-            custom: {
-              families: families,
-              urls: urls,
-            },
-          }}
-        >
-          {pages[0] &&
-            pages.map((page, pageIndex) => {
-              return (
-                <WebfontLoader
-                  config={webFontConfig}
-                  onStatus={webFontStatus}
-                  onFontStatus={fontStatus}
-                >
-                  <div className={classes.pageContainer}>
-                    {page.map(
-                      (
-                        {
-                          a_id,
-                          verse_key,
-                          text,
-                          sajdah,
-                          s_type,
-                          juz,
-                          rub,
-                          page,
-                          words,
-                        },
-                        i
-                      ) => {
-                        return (
+
+      <WebfontLoader
+        config={{
+          custom: {
+            families: families,
+          },
+        }}
+      >
+        {pages[0] &&
+          pages.map((page, pageIndex) => {
+            return (
+              <WebfontLoader
+                config={webFontConfig}
+                onStatus={webFontStatus}
+                onFontStatus={fontStatus}
+              >
+                <Container maxWidth="md">
+                  <PageMetaBarTop
+                    juzMeta={juzMeta}
+                    pages={pages}
+                    suraList={suraList}
+                    pageIndex={pageIndex}
+                  />
+
+                  <Box className={classes.pageContainer}>
+                    {page.map(({ a_id, verse_key, text, page, words }) => {
+                      return (
+                        <>
                           <div
                             key={a_id.toString()}
                             className={classes.container}
@@ -221,93 +172,42 @@ const Aya = () => {
 
                               {/*Aya for Old Madina Mushaf */}
                               {selectItemFont === "Old Madina Mushaf" && (
-                                <div className={classes.ayaWrodTextWrapper}>
-                                  {words.map(({ id, code }) => (
-                                    <Typography
-                                      variant="h3"
-                                      component="b"
-                                      className={classes.ayaWordText}
-                                      style={{
-                                        fontFamily: `QCF_P${String(
-                                          page
-                                        ).padStart(3, 0)}`,
-                                      }}
-                                      key={String(id)}
-                                    >
-                                      {reactHtmlParser(code)}
-                                    </Typography>
-                                  ))}
-                                </div>
+                                <GenerateAyaFromWords
+                                  words={words}
+                                  page={page}
+                                />
                               )}
 
                               {/* Transliteration */}
                               {showTransliteration && (
-                                <Typography
-                                  variant="body1"
-                                  color="textSecondary"
-                                  component="p"
-                                  className={classes.transBn}
-                                >
-                                  <span>
-                                    {Number(
-                                      verse_key.split(":")[1]
-                                    ).toLocaleString("en")}{" "}
-                                    .{" "}
-                                  </span>
-                                  {Boolean(trlEn) && trlEn.aya[i].text}
-                                </Typography>
+                                <AyaTransliteration
+                                  ayaNum={Number(verse_key.split(":")[1])}
+                                />
                               )}
 
                               {/* Translation*/}
                               {showTranslation && (
-                                <>
-                                  {"Mojibor Rahman" === ayaTranslation ? (
-                                    <Typography
-                                      variant="body1"
-                                      color="textSecondary"
-                                      component="p"
-                                      className={classes.transBn}
-                                    >
-                                      <span>
-                                        {Number(
-                                          verse_key.split(":")[1]
-                                        ).toLocaleString("bn")}{" "}
-                                        |{" "}
-                                      </span>
-                                      {
-                                        trBn.aya[verse_key.split(":")[1] - 1]
-                                          .text
-                                      }
-                                    </Typography>
-                                  ) : (
-                                    <Typography
-                                      variant="body1"
-                                      color="textSecondary"
-                                      component="p"
-                                      className={classes.transBn}
-                                    >
-                                      <span>
-                                        {Number(
-                                          verse_key.split(":")[1]
-                                        ).toLocaleString("en")}{" "}
-                                        .{" "}
-                                      </span>
-                                      {Boolean(trEn.aya) && trEn.aya[i].text}
-                                    </Typography>
-                                  )}
-                                </>
+                                <AyaTranslation
+                                  ayaNum={Number(verse_key.split(":")[1])}
+                                />
                               )}
                             </div>
                           </div>
-                        );
-                      }
-                    )}
-                  </div>
-                </WebfontLoader>
-              );
-            })}
-        </WebfontLoader>
-      </div>
+                        </>
+                      );
+                    })}
+                  </Box>
+
+                  <PageMetaBarBottom
+                    pages={pages}
+                    pageIndex={pageIndex}
+                    suraList={suraList}
+                  />
+                </Container>
+              </WebfontLoader>
+            );
+          })}
+      </WebfontLoader>
     </div>
   );
 };

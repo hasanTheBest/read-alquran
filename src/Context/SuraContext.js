@@ -37,12 +37,6 @@ const SuraContext = ({ children }) => {
     trBn,
     trEn,
     trlEn,
-    // sura: sura,
-    // textAr: textAr,
-    // tajweed: tajweed,
-    // trBn: trBn,
-    // trEn: trEn,
-    // trlEn: trlEn,
   };
 
   return <suraContext.Provider value={value}>{children}</suraContext.Provider>;

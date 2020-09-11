@@ -14,21 +14,37 @@ const styles = makeStyles((theme) => ({
     fontWeight: 600,
     padding: ".8rem .5rem",
     margin: ".5rem 0",
+    lineHeight: 2,
   }),
   ayahNumberHafs: {
     fontFamily: "inherit",
     fontWeight: 400,
     marginRight: ".5rem",
   },
+
+  endAyah: {
+    display: "inline",
+    position: "relative",
+    marginRight: "10px",
+  },
+
+  ayahSign: {
+    fontFamily: "inherit",
+  },
+
+  ayahNumber: {
+    display: "inline",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    fontFamily: "inherit",
+    transform: "translate(-50%, -40%)",
+  },
 }));
 
 const AyaArabic = ({ tajweedRule, text, index }) => {
   const { fontSizeArabic, selectItemFont } = React.useContext(SettingContext);
   const classes = styles({ fontSizeArabic, selectItemFont });
-
-  // let [families, urls] = [["Uthmanic Hafs"], [`/fonts/aya/UthmanicHafs1.css`]];
-  // families.push(selectItemFont);
-  // urls.push(`/fonts/aya/${selectItemFont.trim().split(" ").join("-")}.css`);
 
   return (
     <>

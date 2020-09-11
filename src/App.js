@@ -1,4 +1,5 @@
 import React from "react";
+import WebfontLoader from "@dr-kobros/react-webfont-loader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./Containers/Home";
@@ -45,23 +46,35 @@ function App() {
   return (
     <MuiThemeProvider theme={teal}>
       <div className="App">
-        <Router>
-          <SettingProvider>
-            <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
+        <WebfontLoader
+          config={{
+            custom: {
+              families: ["read-alquran", "me_quran"],
+              urls: [
+                "/fonts/sura_names/read_alquran.css",
+                "/fonts/aya/custom-font.css",
+              ],
+            },
+          }}
+        >
+          <Router>
+            <SettingProvider>
+              <Switch>
+                <Route path="/" exact>
+                  <Home />
+                </Route>
 
-              <Route path="/sura/:suraId" exact>
-                <Sura />
-              </Route>
+                <Route path="/sura/:suraId" exact>
+                  <Sura />
+                </Route>
 
-              {/* <Route path="/sura:suraId" exact>
+                {/* <Route path="/sura:suraId" exact>
               <SuraContext />
             </Route> */}
-            </Switch>
-          </SettingProvider>
-        </Router>
+              </Switch>
+            </SettingProvider>
+          </Router>
+        </WebfontLoader>
       </div>
     </MuiThemeProvider>
   );

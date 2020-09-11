@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import SwipeableViews from "react-swipeable-views";
+import { IndexContext } from "../../Context/IndexContext";
 import {
   AppBar,
   Tabs,
@@ -12,13 +13,13 @@ import TabPanel from "./TabPanel";
 import MetaIndex from "./MetaIndex";
 import SuraMeta from "./SuraMeta";
 
-import suraList from "../SuraInfo/data/suraMeta.json";
-import juzMeta from "./data/juzMeta.json";
-import hizbMeta from "./data/hizbMeta.json";
-import manzilsMeta from "./data/manzilsMeta.json";
-import pageMeta from "./data/pageMeta.json";
-import rukusMeta from "./data/rukusMeta.json";
-import sajdasMeta from "./data/sajdasMeta.json";
+// import suraList from "../SuraInfo/data/suraMeta.json";
+// import juzMeta from "./data/juzMeta.json";
+// import hizbMeta from "./data/hizbMeta.json";
+// import manzilsMeta from "./data/manzilsMeta.json";
+// import pageMeta from "./data/pageMeta.json";
+// import rukusMeta from "./data/rukusMeta.json";
+// import sajdasMeta from "./data/sajdasMeta.json";
 
 const useStyles = makeStyles((theme) => ({
   secondaryLight: {
@@ -33,13 +34,24 @@ const useStyles = makeStyles((theme) => ({
 const metaItem = ["Sura", "Page", "Juz", "Ruku", "Hizb", "Manzil", "Sajda"];
 
 const IndexTabs = () => {
+  const {
+    tabValue,
+    handleChangeTab,
+    suraList,
+    pageMeta,
+    juzMeta,
+    rukusMeta,
+    hizbMeta,
+    sajdasMeta,
+    manzilsMeta,
+  } = useContext(IndexContext);
   const classes = useStyles();
   const theme = useTheme();
-  const [tabValue, setTabValue] = useState(metaItem[0]);
+  // const [tabValue, setTabValue] = useState(metaItem[0]);
 
-  const handleChangeTab = (value) => {
-    setTabValue(value);
-  };
+  // const handleChangeTab = (value) => {
+  //   setTabValue(value);
+  // };
 
   // const handleChangeIndex = (index) => {
   //   setTabValue(index);
@@ -92,20 +104,31 @@ const IndexTabs = () => {
           <Grid container spacing={5} justify="center">
             {item === "Sura" && <SuraMeta suraList={suraList.suras.sura} />}
 
-            {item === "Page" && <MetaIndex metaInfo={pageMeta.pages.page} />}
+            {item === "Page" && (
+              <MetaIndex metaInfo={pageMeta.pages.page} metaItem="Page" />
+            )}
 
-            {item === "Juz" && <MetaIndex metaInfo={juzMeta.juzs.juz} />}
+            {item === "Juz" && (
+              <MetaIndex metaInfo={juzMeta.juzs.juz} metaItem="Juz" />
+            )}
 
-            {item === "Hizb" && <MetaIndex metaInfo={hizbMeta.hizbs.quarter} />}
+            {item === "Hizb" && (
+              <MetaIndex metaInfo={hizbMeta.hizbs.quarter} metaItem="Hizb" />
+            )}
 
-            {item === "Ruku" && <MetaIndex metaInfo={rukusMeta.rukus.ruku} />}
+            {item === "Ruku" && (
+              <MetaIndex metaInfo={rukusMeta.rukus.ruku} metaItem="Ruku" />
+            )}
 
             {item === "Manzil" && (
-              <MetaIndex metaInfo={manzilsMeta.manzils.manzil} />
+              <MetaIndex
+                metaInfo={manzilsMeta.manzils.manzil}
+                metaItem="Manzil"
+              />
             )}
 
             {item === "Sajda" && (
-              <MetaIndex metaInfo={sajdasMeta.sajdas.sajda} />
+              <MetaIndex metaInfo={sajdasMeta.sajdas.sajda} metaItem="Sajda" />
             )}
           </Grid>
         </TabPanel>

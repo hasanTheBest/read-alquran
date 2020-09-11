@@ -1,10 +1,9 @@
 import React from "react";
-import { Typography, makeStyles } from "@material-ui/core";
+import { Box, Typography, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   bismillah: {
     textAlign: "center",
-    direction: "rtl",
   },
 }));
 
@@ -12,11 +11,12 @@ const Bismillah = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.bismillahWrapper}>
-      <Typography className={classes.bismillah} variant="h4" component="p">
-        بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+    <Box px={2} py={3}>
+      <Typography className={classes.bismillah} variant="h2" component="p">
+        <span className="raq raq-bismallah"></span>
+        {/* بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ */}
       </Typography>
-    </div>
+    </Box>
   );
 };
 

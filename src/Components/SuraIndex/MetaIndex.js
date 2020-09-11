@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Typography, Link, makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import reactHtmlParser from "react-html-parser";
 
 const useStyles = makeStyles((theme) => ({
   suraIndexContainer: {
@@ -43,19 +44,24 @@ const useStyles = makeStyles((theme) => ({
   verseKeyWrapper: {
     display: "flex",
     justifyContent: "space-between",
+    fontWeight: 500,
   },
   ayaText: {
     direction: "rtl",
     textAlign: "right",
+    fontFamily: "me_quran",
+  },
+  verseKey: {
+    fontWeight: 600,
   },
 }));
 
-const MetaIndex = ({ metaInfo }) => {
+const MetaIndex = ({ metaInfo, metaItem }) => {
   const classes = useStyles();
 
   return (
     <>
-      {metaInfo.map(({ index, name, tname, ename, sura, aya, text }) => (
+      {metaInfo.map(({ index, name, tname, ename, sura, aya, text }, i) => (
         <Grid
           item
           xs={12}
@@ -74,40 +80,58 @@ const MetaIndex = ({ metaInfo }) => {
               component="span"
               className={classes.chapterNumber}
             >
-              {index}.
+              {"Hizb" === metaItem ? (
+                <span>
+                  {parseInt(i / 4) + 1}
+                  <small>
+                    {reactHtmlParser(
+                      String(parseFloat(index / 4)).split(".")[1] === "25"
+                        ? ""
+                        : String(parseFloat(index / 4)).split(".")[1] === "5"
+                        ? "<sup>1</sup>/<sub>4</sub>"
+                        : String(parseFloat(index / 4)).split(".")[1] === "75"
+                        ? "<sup>1</sup>/<sub>2</sub>"
+                        : "<sup>3</sup>/<sub>4</sub>"
+                    )}
+                  </small>
+                </span>
+              ) : (
+                index + ". "
+              )}
             </Typography>
 
             <div className={classes.suraNameWrapper}>
               <Typography
                 variant="body1"
                 color="initial"
-                component="strong"
+                component="div"
                 className={classes.verseKeyWrapper}
               >
-                <span>
+                <Typography variant="body1" component="h6">
                   {tname}{" "}
-                  <small>
+                  <Typography
+                    variant="subtitle2"
+                    component="span"
+                    className={classes.verseKey}
+                  >
                     {sura}:{aya}
-                  </small>
-                </span>
+                  </Typography>
+                </Typography>
                 <Typography
-                  variant="h6"
-                  component="strong"
+                  variant="h4"
+                  // component="b"
                   style={{ textAlign: "right" }}
                 >
-                  {Number(sura).toLocaleString("ar-EG")}
-                  {"  "}
-                  {name}
+                  <span className={`raq raq-surah${sura}`}></span>
                 </Typography>
               </Typography>
               <Typography
                 variant="h6"
-                component="strong"
+                // component="b"
                 noWrap
                 className={classes.ayaText}
               >
-                {Number(aya).toLocaleString("ar-EG")}
-                {"  "} {text}
+                {text}
               </Typography>
             </div>
           </Link>

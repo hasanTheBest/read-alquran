@@ -24,6 +24,19 @@ const useStyles = makeStyles((theme) => ({
   nameArWrapper: {
     textAlign: "right",
   },
+
+  suraTname: {
+    fontWeight: 700,
+  },
+
+  suraName: {
+    lineHeight: 1,
+  },
+
+  ayasCount: {
+    lineHeight: 1,
+    fontWeight: 700,
+  },
 }));
 
 const SuraMeta = ({ suraList }) => {
@@ -42,19 +55,23 @@ const SuraMeta = ({ suraList }) => {
             <Typography
               variant="body1"
               color="initial"
-              component="span"
+              component="div"
               className={classes.ChapterNumberWrapper}
             >
               <Typography
                 variant="h6"
-                component="span"
+                component="div"
                 className={classes.chapterNumber}
               >
                 {index}.
               </Typography>
 
-              <Typography variant="h6" color="initial" component="span">
-                {/* <Tooltip title={name}></Tooltip> */}
+              <Typography
+                variant="body1"
+                color="initial"
+                component="h6"
+                className={classes.suraTname}
+              >
                 {tname}
                 <Typography variant="subtitle2" color="initial">
                   {ename}
@@ -65,12 +82,19 @@ const SuraMeta = ({ suraList }) => {
             <Typography
               variant="h5"
               color="initial"
-              component="span"
+              component="div"
               className={classes.nameArWrapper}
             >
-              <Typography variant="h5">{name}</Typography>
+              <Typography variant="h4" className={classes.suraName}>
+                <span className={`raq raq-surah${index}`}></span>
+              </Typography>
 
-              <Typography variant="subtitle2" color="initial">
+              <Typography
+                variant="caption"
+                color="initial"
+                component="h6"
+                className={classes.ayasCount}
+              >
                 {ayas} Ayah
               </Typography>
             </Typography>
