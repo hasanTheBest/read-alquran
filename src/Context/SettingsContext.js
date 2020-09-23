@@ -5,6 +5,19 @@ import React, { createContext, useState } from "react";
 export const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
+  const { stateSwitch, setStateSwitch } = useState({
+    wbw: true,
+    wbwTransliteration: false,
+    wbwTranslation: true,
+
+    showAya: true,
+    showTajweed: true,
+    showTranslation: true,
+    showTransliteration: false,
+  });
+  const setSwitchValue = (e) => {
+    setStateSwitch({ ...stateSwitch, [e.target.name]: e.target.checked });
+  };
   const [state, setState] = useState({
     mobileOpen: false,
 

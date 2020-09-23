@@ -32,11 +32,10 @@ const Loading = () => {
 };
 
 const Sura = () => {
-  const sura = useParams();
-  const suraId = sura.suraId;
+  const { suraId } = useParams();
 
   return (
-    <div>
+    <div className="sura-container">
       <Suspense fallback={<Loading />}>
         <SuraContext>
           <Header />

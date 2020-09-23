@@ -9,8 +9,9 @@ import {
   IconButton,
   makeStyles,
   Tooltip,
-  Hidden,
   Link,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 
 // Material UI Icons
@@ -22,7 +23,6 @@ import NavigationDrawer from "./Drawer/NavigationDrawer";
 import { IndexContext } from "../../Context/IndexContext";
 import Search from "./Search";
 import Settings from "./Settings";
-// export { default as Logo } from "./Logo";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -43,15 +43,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
+  const theme = useTheme();
+  const breakUp1440 = useMediaQuery(theme.breakpoints.up(1440));
   const classes = useStyles();
   const value = useContext(IndexContext);
-  console.log("Header -> value", value);
   const { toggleNavigationDrawer } = value !== undefined && value;
   let { pathname } = useLocation();
-
-  // const [openNavigationDrawer, setOpenNavigationDrawer] = useState(false);
-  // const toggleNavigationDrawer = () =>
-  //   setOpenNavigationDrawer(!openNavigationDrawer);
 
   return (
     <>
@@ -81,16 +78,13 @@ const Header = () => {
           <Search />
 
           {/* Settings */}
-          <Hidden lgUp>{pathname.startsWith("/sura") && <Settings />}</Hidden>
+          {pathname.startsWith("/sura") && !breakUp1440 && <Settings />}
         </div>
       </AppBar>
 
-      <NavigationDrawer
-      // open={openNavigationDrawer}
-      // toggleNavigationDrawer={toggleNavigationDrawer}
-      />
+      <NavigationDrawer />
 
-      <Hidden lgUp>{pathname.startsWith("/sura") && <Drawer />}</Hidden>
+      {pathname.startsWith("/sura") && !breakUp1440 && <Drawer />}
     </>
   );
 };
