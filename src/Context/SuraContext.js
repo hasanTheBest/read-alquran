@@ -5,32 +5,28 @@ import useSuspenseFetch from "../Hooks/useSuspenseFetch";
 export const suraContext = createContext();
 
 const SuraContext = ({ children }) => {
-  let suraId = useParams();
+  let { suraId } = useParams();
+  let ayaId;
 
-  if (!Number(suraId.suraId)) {
-    let s = suraId.suraId;
-
-    suraId.suraId = s.split(":")[0];
-    suraId.ayaId = s.split(":")[1];
+  if (!Number(suraId)) {
+    suraId = suraId.split(":")[0];
+    ayaId = suraId.split(":")[1];
   }
 
   // const suraId = useParams();
-  const sura = useSuspenseFetch("arabic", suraId.suraId);
-  const textAr = useSuspenseFetch("arabic/textAr", suraId.suraId);
-  const tajweed = useSuspenseFetch("tajweedRule", suraId.suraId);
-  const trBn = useSuspenseFetch("translation/an_bn_mujibor", suraId.suraId);
-  const trEn = useSuspenseFetch("translation/an_en_shahih", suraId.suraId);
-  const trlEn = useSuspenseFetch(
-    "translation/an_en_transliteration",
-    suraId.suraId
-  );
+  const sura = useSuspenseFetch("arabic", suraId);
+  const textAr = useSuspenseFetch("arabic/textAr", suraId);
+  const tajweed = useSuspenseFetch("tajweedRule", suraId);
+  const trBn = useSuspenseFetch("translation/an_bn_mujibor", suraId);
+  const trEn = useSuspenseFetch("translation/an_en_shahih", suraId);
+  const trlEn = useSuspenseFetch("translation/an_en_transliteration", suraId);
 
   //useFetch
 
   const value = {
-    suraId: suraId,
-    ayaId: Number(suraId.ayaId) ? Number(suraId.ayaId) : 1,
+    ayaId: Number(ayaId) ? Number(ayaId) : 1,
     ayaCount: sura.aya.length,
+    suraId,
     sura,
     textAr,
     tajweed,

@@ -29,17 +29,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList }) => {
+const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList, suraId }) => {
   const classes = useStyles();
+  const { tname, ename, ayas, name, type, rukus, order } = suraList.suras.sura[
+    Number(suraId) - 1
+  ];
+  const juz = juzMeta.juzs.juz[pages[pageIndex][0].juz - 1];
 
   return (
     <Box pt={2} pb={1} className={classes.pageMetaBar}>
       <Tooltip
-        title={`Juz: ${pages[pageIndex][0].juz}, sura ${
-          juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].sura
-        }: ${juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].tname} (${
-          juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].ename
-        }), aya: ${juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].aya}`}
+        title={`Juz ${pages[pageIndex][0].juz}, Sura ${juz.sura}: ${juz.tname} (${juz.ename}), Aya: ${juz.aya}`}
       >
         <Typography
           variant="h5"
@@ -52,8 +52,7 @@ const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList }) => {
               juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].index
             ).toLocaleString("ar-EG")}{" "} */}
           </span>
-          {juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].text.split(" ")[0]}{" "}
-          {juzMeta.juzs.juz[pages[pageIndex][0].juz - 1].text.split(" ")[1]}
+          {juz.text.split(" ")[0]} {juz.text.split(" ")[1]}
         </Typography>
       </Tooltip>
 
@@ -68,19 +67,7 @@ const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList }) => {
       </Tooltip>
 
       <Tooltip
-        title={`Sura ${pages[pageIndex][0].verse_key.split(":")[0]}: ${
-          suraList.suras.sura[
-            Number(pages[pageIndex][0].verse_key.split(":")[0]) - 1
-          ].tname
-        } - ${
-          suraList.suras.sura[
-            Number(pages[pageIndex][0].verse_key.split(":")[0]) - 1
-          ].ename
-        } (ayas: ${
-          suraList.suras.sura[
-            Number(pages[pageIndex][0].verse_key.split(":")[0]) - 1
-          ].ayas
-        })`}
+        title={`Sura: ${name} (${type}), Ayas: ${ayas}, Rukus: ${rukus}, Revelation Order: ${order}`}
       >
         <Typography
           variant="h6"
@@ -94,27 +81,13 @@ const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList }) => {
             className={classes.SuraNameTopRight}
           >
             <span>
-              {pages[pageIndex][0].verse_key.split(":")[0]}
+              {suraId}
               {". "}
-              {
-                suraList.suras.sura[
-                  Number(pages[pageIndex][0].verse_key.split(":")[0]) - 1
-                ].tname
-              }
+              {tname}
             </span>
-            <span>
-              {
-                suraList.suras.sura[
-                  Number(pages[pageIndex][0].verse_key.split(":")[0]) - 1
-                ].ename
-              }
-            </span>
+            <span>{ename}</span>
           </Typography>
-          <span
-            className={`s_name raq raq-surah${
-              pages[pageIndex][0].verse_key.split(":")[0]
-            }`}
-          ></span>
+          <span className={`s_name raq raq-surah${suraId}`}></span>
         </Typography>
       </Tooltip>
     </Box>

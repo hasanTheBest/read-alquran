@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+    zIndex: theme.zIndex.appBar - 10,
   },
   content: {
     flexGrow: 1,
@@ -48,12 +49,10 @@ function ResponsiveDrawer() {
   const theme = useTheme();
   const breakUp1440 = useMediaQuery(theme.breakpoints.up(1440));
   const classes = useStyles();
-  const { drawerMobileOpen, setDrawerMobileOpen } = React.useContext(
-    SettingContext
-  );
+  const { openDrawer, handleOpenDrawer } = React.useContext(SettingContext);
 
   const handleDrawerToggle = () => {
-    setDrawerMobileOpen();
+    handleOpenDrawer();
   };
 
   const drawer = (
@@ -87,9 +86,9 @@ function ResponsiveDrawer() {
       <nav className={classes.drawer} aria-label="mailbox folders">
         {!breakUp1440 ? (
           <Drawer
-            variant="temporary"
+            variant="persistent"
             anchor={theme.direction === "rtl" ? "left" : "right"}
-            open={drawerMobileOpen}
+            open={openDrawer}
             onClose={handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,

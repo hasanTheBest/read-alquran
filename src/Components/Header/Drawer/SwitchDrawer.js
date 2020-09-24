@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
@@ -8,14 +8,14 @@ import { SettingContext } from "../../../Context/SettingsContext";
 export default function SwitchLabels() {
   const {
     showWbw,
-    showTranslation,
-    showTransliteration,
     showWbwTranslation,
     showWbwTransliteration,
+    showAya,
+    showTranslation,
+    showTransliteration,
     showTajweed,
     setSwitchValue,
-    showAya,
-  } = React.useContext(SettingContext);
+  } = useContext(SettingContext);
 
   const handleChange = (event) => {
     setSwitchValue(event);
@@ -26,7 +26,12 @@ export default function SwitchLabels() {
       <FormGroup row>
         <FormControlLabel
           control={
-            <Switch checked={showWbw} onChange={handleChange} name="wbw" />
+            <Switch
+              checked={showWbw}
+              onChange={handleChange}
+              name="showWbw"
+              color="primary"
+            />
           }
           label="Word by Word"
         />
@@ -36,7 +41,7 @@ export default function SwitchLabels() {
               <Switch
                 checked={showWbwTransliteration}
                 onChange={handleChange}
-                name="wbwTransliteration"
+                name="showWbwTransliteration"
                 color="primary"
               />
             }
@@ -49,7 +54,7 @@ export default function SwitchLabels() {
               <Switch
                 checked={showWbwTranslation}
                 onChange={handleChange}
-                name="wbwTranslation"
+                name="showWbwTranslation"
                 color="primary"
               />
             }
@@ -58,7 +63,12 @@ export default function SwitchLabels() {
         )}
         <FormControlLabel
           control={
-            <Switch checked={showAya} onChange={handleChange} name="showAya" />
+            <Switch
+              checked={showAya}
+              onChange={handleChange}
+              name="showAya"
+              color="primary"
+            />
           }
           label="Show Aya"
         />
@@ -69,6 +79,7 @@ export default function SwitchLabels() {
                 checked={showTajweed}
                 onChange={handleChange}
                 name="showTajweed"
+                color="primary"
               />
             }
             label="Tajweed"
@@ -92,6 +103,7 @@ export default function SwitchLabels() {
               onChange={handleChange}
               name="showTransliteration"
               color="primary"
+              disabled
             />
           }
           label="Transliteration"

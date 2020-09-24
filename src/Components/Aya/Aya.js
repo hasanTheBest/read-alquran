@@ -86,6 +86,7 @@ const Aya = () => {
     fontSizeArabic,
     selectItemFont,
   } = useContext(SettingContext);
+
   const { sura, suraId, ayaCount, ayaId, tajweed, textAr } = useContext(
     suraContext
   );
@@ -136,6 +137,7 @@ const Aya = () => {
                       pages={pages}
                       suraList={suraList}
                       pageIndex={pageIndex}
+                      suraId={Number(suraId)}
                     />
 
                     <Box className={classes.pageContainer}>
@@ -221,7 +223,7 @@ const Aya = () => {
 
                     <PageMetaBarBottom
                       pages={pages}
-                      pageIndex={pageIndex}
+                      suraId={Number(suraId)}
                       suraList={suraList}
                     />
                   </Container>

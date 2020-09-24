@@ -37,13 +37,13 @@ export const pageByPage = (sura, suraId, ayaCount, ayaId) => {
         ? sura.aya
             .filter(
               ({ page, verse_key }) =>
-                p1 === page && suraId.suraId === verse_key.split(":")[0]
+                p1 === page && suraId === verse_key.split(":")[0]
             )
             .map((v) => v)
         : sura.aya2
             .filter(
               ({ page, verse_key }) =>
-                p1 === page && suraId.suraId === verse_key.split(":")[0]
+                p1 === page && suraId === verse_key.split(":")[0]
             )
             .map((v) => v);
 
@@ -63,19 +63,9 @@ export const pageByPage = (sura, suraId, ayaCount, ayaId) => {
     },
   };
 
-  const webFontStatus = (status) => {
-    console.log(status);
-  };
-
-  const fontStatus = (s1, s2, s3) => {
-    console.log(s1, s2, s3);
-  };
-
   return {
     pages,
     webFontConfig,
-    webFontStatus,
-    fontStatus,
   };
 };
 

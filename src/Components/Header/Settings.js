@@ -4,10 +4,10 @@ import { SettingsApplications } from "@material-ui/icons";
 import { SettingContext } from "../../Context/SettingsContext";
 
 const Settings = () => {
-  const { setDrawerMobileOpen } = React.useContext(SettingContext);
+  const { handleOpenDrawer } = React.useContext(SettingContext);
 
   const toggleSetting = () => {
-    setDrawerMobileOpen();
+    handleOpenDrawer();
   };
 
   return (

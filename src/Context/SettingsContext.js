@@ -1,89 +1,72 @@
 import React, { createContext, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import useSuspenseFetch from "../Hooks/useSuspenseFetch";
 
 export const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
-  const { stateSwitch, setStateSwitch } = useState({
-    wbw: true,
-    wbwTransliteration: false,
-    wbwTranslation: true,
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const [stateSwitch, setStateSwitch] = useState({
+    showWbw: true,
+    showWbwTransliteration: false,
+    showWbwTranslation: true,
 
     showAya: true,
     showTajweed: true,
     showTranslation: true,
     showTransliteration: false,
   });
-  const setSwitchValue = (e) => {
-    setStateSwitch({ ...stateSwitch, [e.target.name]: e.target.checked });
-  };
-  const [state, setState] = useState({
-    mobileOpen: false,
 
-    // Switch
-    wbw: true,
-    wbwTransliteration: false,
-    wbwTranslation: true,
+  const [stateSlider, setStateSlider] = useState({
+    fontSizeArabic: 40,
+    fontSizeTranslation: 18,
+  });
 
-    showAya: true,
-    showTajweed: true,
-    showTranslation: true,
-    showTransliteration: false,
-
-    // Slider
-    fontSizeAr: 32,
-    fontSizeTr: 18,
-
-    // Select
-    font: "Uthmanic Hafs",
-    translation: "Mojibor Rahman",
+  const [stateSelect, setStateSelect] = useState({
+    selectItemFont: "Uthmanic Hafs",
     wordTranslation: "word-tr-bangla",
-    recitation: "Omar Hisham Farabi",
+    ayaTranslation: "Mojibor Rahman",
+    ayaRecitation: "Omar Hisham Farabi",
   });
 
-  const settings = {
-    showWbw: state.wbw,
-    showWbwTranslation: state.wbwTranslation,
-    showWbwTransliteration: state.wbwTransliteration,
-    showTajweed: state.showTajweed,
-    showAya: state.showAya,
-    showTranslation: state.showTranslation,
-    showTransliteration: state.showTransliteration,
-    setSwitchValue: (e) =>
-      setState({ ...state, [e.target.name]: e.target.checked }),
+  const handleOpenDrawer = () => setOpenDrawer(!openDrawer);
 
-    fontSizeArabic: state.fontSizeAr,
-    fontSizeTranslation: state.fontSizeTr,
-    setFontSize: (newValue, text) => {
-      if ("arabic" === text) {
-        setState({
-          ...state,
-          fontSizeAr: newValue,
-        });
-      } else {
-        setState({ ...state, fontSizeTr: newValue });
-      }
-    },
+  const setSwitchValue = (e) => {
+    setStateSwitch((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.checked,
+    }));
+  };
 
-    selectItemFont: state.font,
-    wordTranslation: state.wordTranslation,
-    ayaTranslation: state.translation,
-    ayaRecitation: state.recitation,
-    setSelectItemValue: (event, name) =>
-      setState({
-        ...state,
-        [name]: event.target.value,
-      }),
+  const setFontSize = (newValue, text) => {
+    if ("arabic" === text) {
+      setStateSlider((prev) => ({
+        ...prev,
+        fontSizeArabic: newValue,
+      }));
+    } else {
+      setStateSlider((prev) => ({ ...prev, fontSizeTranslation: newValue }));
+    }
+  };
 
-    drawerMobileOpen: state.mobileOpen,
-    setDrawerMobileOpen: () => {
-      setState({ ...state, mobileOpen: !state.mobileOpen });
-    },
+  const setSelectItemValue = (event, name) => {
+    setStateSelect((prev) => {
+      return { ...prev, [name]: event.target.value };
+    });
   };
 
   return (
-    <SettingContext.Provider value={{ ...settings }}>
+    <SettingContext.Provider
+      value={{
+        ...stateSwitch,
+        ...stateSelect,
+        ...stateSlider,
+        openDrawer,
+        handleOpenDrawer,
+        setFontSize,
+        setSwitchValue,
+        setSelectItemValue,
+      }}
+    >
       {children}
     </SettingContext.Provider>
   );

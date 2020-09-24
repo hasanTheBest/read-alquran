@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 
 export default function SliderNav() {
   const classes = useStyles();
-  const { fontSizeArabic, fontSizeTranslation, setFontSize } = React.useContext(
+  const { fontSizeArabic, fontSizeTranslation, setFontSize } = useContext(
     SettingContext
   );
 
@@ -28,15 +28,14 @@ export default function SliderNav() {
           Font Size (Arabic) <b>{`${fontSizeArabic}px`}</b>
         </Typography>
         <Slider
-          defaultValue={48}
+          defaultValue={40}
           value={fontSizeArabic}
           valueLabelFormat={fontSizeArabic}
           aria-labelledby="font-size-arabic"
           onChange={(e, value) => handleChangeFontSize(e, value, "arabic")}
-          step={1}
           valueLabelDisplay="auto"
           min={30}
-          max={80}
+          max={70}
         />
       </div>
 
@@ -50,7 +49,6 @@ export default function SliderNav() {
           valueLabelFormat={fontSizeTranslation}
           onChange={(e, value) => handleChangeFontSize(e, value, "translation")}
           aria-labelledby="font-size-translation"
-          step={1}
           valueLabelDisplay="auto"
           min={14}
           max={34}
