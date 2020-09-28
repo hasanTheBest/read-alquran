@@ -36,7 +36,7 @@ const styles = makeStyles((theme) => ({
   }),
 }));
 
-const Words = ({ words, mushafFont, ayaNum }) => {
+const Words = ({ props: { words, mushafFont, ayaNum } }) => {
   const {
     showWbwTransliteration,
     showWbwTranslation,

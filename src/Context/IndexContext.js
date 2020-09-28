@@ -11,29 +11,31 @@ import manzilsMeta from "../Components/SuraIndex/data/manzilsMeta.json";
 export const IndexContext = createContext();
 
 const IndexContextProvider = ({ children }) => {
+  // const [openNavigationDrawer, setOpenNavigationDrawer] = useState(false);
   const [tabValue, setTabValue] = useState("Sura");
-  const [openNavigationDrawer, setOpenNavigationDrawer] = useState(false);
 
   const handleChangeTab = (value) => {
     setTabValue(value);
   };
-  const toggleNavigationDrawer = () =>
-    setOpenNavigationDrawer(!openNavigationDrawer);
+
+  // const toggleNavigationDrawer = () =>
+  //   setOpenNavigationDrawer(!openNavigationDrawer);
 
   return (
     <IndexContext.Provider
-      value={{
-        tabValue,
-        openNavigationDrawer,
-        handleChangeTab,
-        toggleNavigationDrawer,
-        suraList,
-        pageMeta,
-        juzMeta,
-        rukusMeta,
-        hizbMeta,
-        sajdasMeta,
-        manzilsMeta,
+      context={{
+        // suraList,
+        // pageMeta,
+        // juzMeta,
+        // rukusMeta,
+        // hizbMeta,
+        // sajdasMeta,
+        // manzilsMeta,
+        // tabValue,
+        // openNavigationDrawer,
+        // handleChangeTab,
+        // toggleNavigationDrawer,
+        log: "console.log(IndexContext)",
       }}
     >
       {children}

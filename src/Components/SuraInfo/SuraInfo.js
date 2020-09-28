@@ -51,7 +51,7 @@ const SelectAya = ({ aya }) => {
   for (let i = 1; i <= aya; i++) {
     optionsAya = [
       ...optionsAya,
-      <MenuItem value={i} className={classes.link}>
+      <MenuItem value={i} className={classes.link} key={String(i)}>
         {i}
       </MenuItem>,
     ];

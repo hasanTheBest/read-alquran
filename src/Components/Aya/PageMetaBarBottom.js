@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PageMetaBarBottom = ({ suraList, suraId }) => {
+const PageMetaBarBottom = ({ props: { suraList, suraId } }) => {
   const classes = useStyles(suraId);
 
   return (

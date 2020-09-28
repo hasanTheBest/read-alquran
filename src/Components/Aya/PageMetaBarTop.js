@@ -29,7 +29,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PageMetaBarTop = ({ juzMeta, pages, pageIndex, suraList, suraId }) => {
+const PageMetaBarTop = ({
+  props: { juzMeta, pages, pageIndex, suraList, suraId },
+}) => {
   const classes = useStyles();
   const { tname, ename, ayas, name, type, rukus, order } = suraList.suras.sura[
     Number(suraId) - 1

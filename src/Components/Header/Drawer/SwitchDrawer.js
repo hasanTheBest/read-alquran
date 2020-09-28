@@ -103,7 +103,6 @@ export default function SwitchLabels() {
               onChange={handleChange}
               name="showTransliteration"
               color="primary"
-              disabled
             />
           }
           label="Transliteration"

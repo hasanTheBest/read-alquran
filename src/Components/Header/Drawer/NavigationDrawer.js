@@ -51,14 +51,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavigationDrawer(/* { open, toggleNavigationDrawer } */) {
+function NavigationDrawer({
+  props: { openNavigationDrawer, toggleNavigationDrawer },
+}) {
   const classes = useStyles();
   let { pathname } = useLocation();
-  const value = useContext(IndexContext);
-  const { openNavigationDrawer, toggleNavigationDrawer, handleChangeTab } =
-    value !== undefined && value;
+
+  const context = useContext(IndexContext);
+  console.log("context", context);
+
+  // const { openNavigationDrawer, toggleNavigationDrawer, handleChangeTab } =
+  //   value !== undefined && value;
   // const { handleChangeTab } = value !== undefined && value;
   // console.log("NavigationDrawer -> value", value);
+
+  const handleChangeTab = () => {};
 
   const drawer = (
     <div>
@@ -110,6 +117,7 @@ function NavigationDrawer(/* { open, toggleNavigationDrawer } */) {
             to={"Home" === text ? "/" : `/${text}`}
             component={RouterLink}
             className={classes.navDrawerLink}
+            key={text}
           >
             <ListItem button key={text}>
               <ListItemIcon>

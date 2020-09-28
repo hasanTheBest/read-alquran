@@ -4,6 +4,7 @@ export const SettingContext = createContext();
 
 const SettingProvider = ({ children }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [readingMode, setReadingMode] = useState(false);
 
   const [stateSwitch, setStateSwitch] = useState({
     showWbw: true,
@@ -29,6 +30,7 @@ const SettingProvider = ({ children }) => {
   });
 
   const handleOpenDrawer = () => setOpenDrawer(!openDrawer);
+  const toggleReadingMode = () => setReadingMode(!readingMode);
 
   const setSwitchValue = (e) => {
     setStateSwitch((prev) => ({
@@ -61,6 +63,8 @@ const SettingProvider = ({ children }) => {
         ...stateSelect,
         ...stateSlider,
         openDrawer,
+        readingMode,
+        toggleReadingMode,
         handleOpenDrawer,
         setFontSize,
         setSwitchValue,

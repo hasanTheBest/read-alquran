@@ -12,8 +12,8 @@ const Home = () => {
         <Header />
         <Banner />
         <Index />
+        <Footer />
       </IndexContextProvider>
-      <Footer />
     </div>
   );
 };

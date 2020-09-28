@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import WebfontLoader from "@dr-kobros/react-webfont-loader";
 
@@ -21,19 +21,17 @@ import suraList from "../SuraInfo/data/suraMeta.json";
 
 // Components
 import Words from "../Words/Words";
-import AyaArabic from "./AyaArabic";
 import Drawer from "../Header/Drawer/Drawer";
 import { pageByPage } from "../../Helper/helper";
 import PageMetaBarTop from "../Aya/PageMetaBarTop";
 import PageMetaBarBottom from "../Aya/PageMetaBarBottom";
-import AyaTransliteration from "./trans/AyaTransliteration";
-import AyaTranslation from "./trans/AyaTranslation";
-import GenerateAyaFromWords from "./GenerateAyaFromWords";
 
 // Color
 import tajweedStyle from "./TajweedStyle.css";
 import teal from "@material-ui/core/colors/teal";
 import borderClip from "./border.png";
+import AyaWrapper from "./AyaWrapper";
+import ReadingMode from "./ReadingMode";
 
 const styles = makeStyles((theme) => ({
   maxWidthWrapper: {
@@ -57,11 +55,12 @@ const styles = makeStyles((theme) => ({
     },
   },
 
-  pageContainer: {
+  pageContainer: (readingMode) => ({
     border: "1.5rem solid teal",
     width: "100%",
     borderImage: `url(${borderClip}) 30 repeat`,
-  },
+    textAlign: readingMode ? "center" : "inherit",
+  }),
   settingDrawerLgDown: {
     "& .MuiDrawer-paperAnchorRight": {
       left: `calc(50% + 445px)`,
@@ -77,30 +76,15 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Aya = () => {
-  const {
-    showWbw,
-    showAya,
-    showTranslation,
-    showTransliteration,
-    showTajweed,
-    fontSizeArabic,
-    selectItemFont,
-  } = useContext(SettingContext);
+  const { showWbw, selectItemFont, readingMode } = useContext(SettingContext);
 
-  const { sura, suraId, ayaCount, ayaId, tajweed, textAr } = useContext(
-    suraContext
-  );
+  const { sura, suraId, ayaCount, ayaId } = useContext(suraContext);
 
   const theme = useTheme();
   const breakUp1440 = useMediaQuery(theme.breakpoints.up(1440));
-  const classes = styles({ fontSizeArabic });
+  const classes = styles(readingMode);
 
-  const { pages, webFontConfig, webFontStatus, fontStatus } = pageByPage(
-    sura,
-    suraId,
-    ayaCount,
-    ayaId
-  );
+  const { pages, webFontConfig } = pageByPage(sura, suraId, ayaCount, ayaId);
 
   let { pathname } = useLocation();
 
@@ -123,113 +107,95 @@ const Aya = () => {
             },
           }}
         >
-          {pages[0] &&
-            pages.map((page, pageIndex) => {
-              return (
-                <WebfontLoader
-                  config={webFontConfig}
-                  onStatus={webFontStatus}
-                  onFontStatus={fontStatus}
-                >
-                  <Container className={classes.maxWidthWrapper}>
-                    <PageMetaBarTop
-                      juzMeta={juzMeta}
-                      pages={pages}
-                      suraList={suraList}
-                      pageIndex={pageIndex}
-                      suraId={Number(suraId)}
-                    />
+          <>
+            {pages[0] &&
+              pages.map((page, pageIndex) => {
+                return (
+                  <WebfontLoader config={webFontConfig} key={String(pageIndex)}>
+                    <Container className={classes.maxWidthWrapper}>
+                      <PageMetaBarTop
+                        props={{
+                          juzMeta,
+                          pages,
+                          suraList,
+                          pageIndex,
+                          suraId: Number(suraId),
+                        }}
+                      />
 
-                    <Box className={classes.pageContainer}>
-                      {page.map(({ a_id, verse_key, text, page, words }) => {
-                        return (
-                          <>
-                            <div
-                              key={a_id.toString()}
-                              className={classes.container}
-                            >
-                              {/* Words */}
-                              {showWbw &&
-                              selectItemFont === "Old Madina Mushaf" ? (
-                                <Words
-                                  ayaNum={Number(verse_key.split(":")[1])}
-                                  words={words}
-                                  mushafFont={`QCF_P${String(page).padStart(
-                                    3,
-                                    0
-                                  )}`}
-                                />
-                              ) : (
-                                <Words
-                                  ayaNum={Number(verse_key.split(":")[1])}
-                                  words={words}
-                                  mushafFont={null}
-                                />
-                              )}
+                      <Box className={classes.pageContainer}>
+                        {page.map(
+                          ({
+                            a_id,
+                            verse_key,
+                            text,
+                            page,
+                            words,
+                            tajweed,
+                            translation,
+                          }) => {
+                            const ayaNum = Number(verse_key.split(":")[1]);
 
-                              <div className={classes.ayaWrapper}>
-                                {/* Aya Arabic */}
-                                {showAya &&
-                                  "Old Madina Mushaf" !== selectItemFont &&
-                                  (showTajweed ? (
-                                    <AyaArabic
-                                      tajweedRule={
-                                        tajweed.aya[
-                                          Number(verse_key.split(":")[1] - 1)
-                                        ]
-                                      }
-                                      text={
-                                        textAr.aya[
-                                          Number(verse_key.split(":")[1]) - 1
-                                        ]._text
-                                      }
-                                      index={Number(verse_key.split(":")[1])}
+                            return (
+                              <Fragment key={String(a_id)}>
+                                {!readingMode ? (
+                                  <div className={classes.container}>
+                                    {/* Words */}
+                                    {showWbw &&
+                                    selectItemFont === "Old Madina Mushaf" ? (
+                                      <Words
+                                        props={{
+                                          ayaNum,
+                                          words,
+                                          mushafFont: `QCF_P${String(
+                                            page
+                                          ).padStart(3, 0)}`,
+                                        }}
+                                      />
+                                    ) : (
+                                      <Words
+                                        props={{
+                                          ayaNum,
+                                          words,
+                                          mushafFont: null,
+                                        }}
+                                      />
+                                    )}
+
+                                    <AyaWrapper
+                                      props={{
+                                        text,
+                                        tajweed,
+                                        ayaNum,
+                                        words,
+                                        page,
+                                        translation,
+                                      }}
                                     />
-                                  ) : (
-                                    <AyaArabic
-                                      tajweedRule={null}
-                                      text={text}
-                                      index={Number(verse_key.split(":")[1])}
-                                    />
-                                  ))}
-
-                                {/*Aya for Old Madina Mushaf */}
-                                {selectItemFont === "Old Madina Mushaf" && (
-                                  <GenerateAyaFromWords
-                                    words={words}
-                                    page={page}
+                                  </div>
+                                ) : (
+                                  <ReadingMode
+                                    props={{
+                                      text,
+                                      tajweedRule: tajweed,
+                                      index: ayaNum,
+                                    }}
                                   />
                                 )}
+                              </Fragment>
+                            );
+                          }
+                        )}
+                      </Box>
 
-                                {/* Transliteration */}
-                                {showTransliteration && (
-                                  <AyaTransliteration
-                                    ayaNum={Number(verse_key.split(":")[1])}
-                                  />
-                                )}
-
-                                {/* Translation*/}
-                                {showTranslation && (
-                                  <AyaTranslation
-                                    ayaNum={Number(verse_key.split(":")[1])}
-                                  />
-                                )}
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })}
-                    </Box>
-
-                    <PageMetaBarBottom
-                      pages={pages}
-                      suraId={Number(suraId)}
-                      suraList={suraList}
-                    />
-                  </Container>
-                </WebfontLoader>
-              );
-            })}
+                      <PageMetaBarBottom
+                        props={{ suraList, suraId: Number(suraId) }}
+                      />
+                    </Container>
+                  </WebfontLoader>
+                );
+              })}
+          </>
         </WebfontLoader>
       </div>
     </>
