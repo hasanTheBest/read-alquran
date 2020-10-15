@@ -91,6 +91,21 @@ const Aya = () => {
   let families = ["Uthamanic Hafs"];
   families.push(selectItemFont);
 
+  let ayaWithPageInfo = [];
+
+  [...new Set(sura.aya.map(({ page }) => page))].forEach((p) => {
+    let pn = sura.aya.filter(({ page }) => p === Number(page));
+
+    pn[0] = { ...pn[0], pageInfo: { pNumber: p, type: "start" } };
+    pn[pn.length - 1] = {
+      ...pn[pn.length - 1],
+      pageInfo: { pNumber: p, type: "end" },
+    };
+
+    return (ayaWithPageInfo = [...ayaWithPageInfo, ...pn]);
+  });
+  console.log("Aya -> ayaWithPageInfo", ayaWithPageInfo);
+
   return (
     <>
       {breakUp1440 && (

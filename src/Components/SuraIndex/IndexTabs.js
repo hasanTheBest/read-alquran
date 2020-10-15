@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { IndexContext } from "../../Context/IndexContext";
 import {
@@ -13,13 +13,13 @@ import TabPanel from "./TabPanel";
 import MetaIndex from "./MetaIndex";
 import SuraMeta from "./SuraMeta";
 
-// import suraList from "../SuraInfo/data/suraMeta.json";
-// import juzMeta from "./data/juzMeta.json";
-// import hizbMeta from "./data/hizbMeta.json";
-// import manzilsMeta from "./data/manzilsMeta.json";
-// import pageMeta from "./data/pageMeta.json";
-// import rukusMeta from "./data/rukusMeta.json";
-// import sajdasMeta from "./data/sajdasMeta.json";
+import suraList from "../SuraInfo/data/suraMeta.json";
+import juzMeta from "./data/juzMeta.json";
+import hizbMeta from "./data/hizbMeta.json";
+import manzilsMeta from "./data/manzilsMeta.json";
+import pageMeta from "./data/pageMeta.json";
+import rukusMeta from "./data/rukusMeta.json";
+import sajdasMeta from "./data/sajdasMeta.json";
 
 const useStyles = makeStyles((theme) => ({
   secondaryLight: {
@@ -34,28 +34,28 @@ const useStyles = makeStyles((theme) => ({
 const metaItem = ["Sura", "Page", "Juz", "Ruku", "Hizb", "Manzil", "Sajda"];
 
 const IndexTabs = () => {
-  const {
-    tabValue,
-    handleChangeTab,
-    suraList,
-    pageMeta,
-    juzMeta,
-    rukusMeta,
-    hizbMeta,
-    sajdasMeta,
-    manzilsMeta,
-  } = useContext(IndexContext);
+  // const {
+  //   tabValue,
+  //   handleChangeTab,
+  //   suraList,
+  //   pageMeta,
+  //   juzMeta,
+  //   rukusMeta,
+  //   hizbMeta,
+  //   sajdasMeta,
+  //   manzilsMeta,
+  // } = useContext(IndexContext);
   const classes = useStyles();
   const theme = useTheme();
-  // const [tabValue, setTabValue] = useState(metaItem[0]);
+  const [tabValue, setTabValue] = useState(metaItem[0]);
 
-  // const handleChangeTab = (value) => {
-  //   setTabValue(value);
-  // };
+  const handleChangeTab = (value) => {
+    setTabValue(value);
+  };
 
-  // const handleChangeIndex = (index) => {
-  //   setTabValue(index);
-  // };
+  const handleChangeIndex = (index) => {
+    setTabValue(index);
+  };
 
   function a11yProps(index) {
     return {
