@@ -4,7 +4,7 @@ import WebfontLoader from "@dr-kobros/react-webfont-loader";
 
 // Context
 import { SettingContext } from "../../Context/SettingsContext";
-import { suraContext } from "../../Context/SuraContext";
+import { SuraContext } from "../../Context/SuraContextProvider";
 
 // Material UI Components
 import {
@@ -32,6 +32,7 @@ import teal from "@material-ui/core/colors/teal";
 import borderClip from "./border.png";
 import AyaWrapper from "./AyaWrapper";
 import ReadingMode from "./ReadingMode";
+import AyaInfiniteLoader from "./AyaInfiniteLoader";
 
 const styles = makeStyles((theme) => ({
   maxWidthWrapper: {
@@ -78,13 +79,13 @@ const styles = makeStyles((theme) => ({
 const Aya = () => {
   const { showWbw, selectItemFont, readingMode } = useContext(SettingContext);
 
-  const { sura, suraId, ayaCount, ayaId } = useContext(suraContext);
+  const { sura, suraId, ayaCount, ayaId } = useContext(SuraContext);
 
   const theme = useTheme();
   const breakUp1440 = useMediaQuery(theme.breakpoints.up(1440));
   const classes = styles(readingMode);
 
-  const { pages, webFontConfig } = pageByPage(sura, suraId, ayaCount, ayaId);
+  // const { pages, webFontConfig } = pageByPage(sura, suraId, ayaCount, ayaId);
 
   let { pathname } = useLocation();
 
@@ -104,7 +105,7 @@ const Aya = () => {
 
     return (ayaWithPageInfo = [...ayaWithPageInfo, ...pn]);
   });
-  console.log("Aya -> ayaWithPageInfo", ayaWithPageInfo);
+  // console.log("Aya -> ayaWithPageInfo", ayaWithPageInfo);
 
   return (
     <>
@@ -123,93 +124,100 @@ const Aya = () => {
           }}
         >
           <>
-            {pages[0] &&
-              pages.map((page, pageIndex) => {
+            {/* {ayaWithPageInfo[0] &&
+              ayaWithPageInfo.map((item) => {
                 return (
-                  <WebfontLoader config={webFontConfig} key={String(pageIndex)}>
-                    <Container className={classes.maxWidthWrapper}>
-                      <PageMetaBarTop
-                        props={{
-                          juzMeta,
-                          pages,
-                          suraList,
-                          pageIndex,
-                          suraId: Number(suraId),
-                        }}
-                      />
+                  <WebfontLoader config={webFontConfig} key={String(pageIndex)}> */}
+            <Container className={classes.maxWidthWrapper}>
+              {/* {item.pageInfo.type === "start" && (
+                        <>
+                          <PageMetaBarTop
+                            props={{
+                              juzMeta,
+                              pages,
+                              suraList,
+                              pageIndex,
+                              suraId: Number(suraId),
+                            }}
+                          />
+                        </>
+                      )} */}
+              <Box className={classes.pageContainer}>
+                <AyaInfiniteLoader />
+                {/*                 {ayaWithPageInfo.map(
+                  ({
+                    a_id,
+                    verse_key,
+                    text,
+                    page,
+                    words,
+                    tajweed,
+                    translation,
+                  }) => {
+                    const ayaNum = Number(verse_key.split(":")[1]);
 
-                      <Box className={classes.pageContainer}>
-                        {page.map(
-                          ({
-                            a_id,
-                            verse_key,
-                            text,
-                            page,
-                            words,
-                            tajweed,
-                            translation,
-                          }) => {
-                            const ayaNum = Number(verse_key.split(":")[1]);
+                    return (
+                      <Fragment key={String(a_id)}>
+                        {!readingMode ? (
+                          <div className={classes.container}>
+                            {showWbw &&
+                            selectItemFont === "Old Madina Mushaf" ? (
+                              <Words
+                                props={{
+                                  ayaNum,
+                                  words,
+                                  mushafFont: `QCF_P${String(page).padStart(
+                                    3,
+                                    0
+                                  )}`,
+                                }}
+                              />
+                            ) : (
+                              <Words
+                                props={{
+                                  ayaNum,
+                                  words,
+                                  mushafFont: null,
+                                }}
+                              />
+                            )}
 
-                            return (
-                              <Fragment key={String(a_id)}>
-                                {!readingMode ? (
-                                  <div className={classes.container}>
-                                    {/* Words */}
-                                    {showWbw &&
-                                    selectItemFont === "Old Madina Mushaf" ? (
-                                      <Words
-                                        props={{
-                                          ayaNum,
-                                          words,
-                                          mushafFont: `QCF_P${String(
-                                            page
-                                          ).padStart(3, 0)}`,
-                                        }}
-                                      />
-                                    ) : (
-                                      <Words
-                                        props={{
-                                          ayaNum,
-                                          words,
-                                          mushafFont: null,
-                                        }}
-                                      />
-                                    )}
-
-                                    <AyaWrapper
-                                      props={{
-                                        text,
-                                        tajweed,
-                                        ayaNum,
-                                        words,
-                                        page,
-                                        translation,
-                                      }}
-                                    />
-                                  </div>
-                                ) : (
-                                  <ReadingMode
-                                    props={{
-                                      text,
-                                      tajweedRule: tajweed,
-                                      index: ayaNum,
-                                    }}
-                                  />
-                                )}
-                              </Fragment>
-                            );
-                          }
+                            <AyaWrapper
+                              props={{
+                                text,
+                                tajweed,
+                                ayaNum,
+                                words,
+                                page,
+                                translation,
+                              }}
+                            />
+                          </div>
+                        ) : (
+                          <ReadingMode
+                            props={{
+                              text,
+                              tajweedRule: tajweed,
+                              index: ayaNum,
+                            }}
+                          />
                         )}
-                      </Box>
-
-                      <PageMetaBarBottom
-                        props={{ suraList, suraId: Number(suraId) }}
-                      />
-                    </Container>
-                  </WebfontLoader>
-                );
-              })}
+                      </Fragment>
+                    );
+                  }
+                )} */}
+              </Box>
+              {/* {item.pageInfo.type === "end" && (
+                        <>
+                          <PageMetaBarBottom
+                            props={{ suraList, suraId: Number(suraId) }}
+                          />
+                        </>
+                      )} */}
+            </Container>
+            {/* </WebfontLoader>
+              //   );
+              // })} */}
           </>
         </WebfontLoader>
       </div>

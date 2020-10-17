@@ -2,9 +2,9 @@ import React, { createContext } from "react";
 import { useParams } from "react-router-dom";
 import useSuspenseFetch from "../Hooks/useSuspenseFetch";
 
-export const suraContext = createContext();
+export const SuraContext = createContext();
 
-const SuraContext = ({ children }) => {
+const SuraContextProvider = ({ children }) => {
   let { suraId } = useParams();
   let ayaId;
 
@@ -22,7 +22,7 @@ const SuraContext = ({ children }) => {
     sura,
   };
 
-  return <suraContext.Provider value={value}>{children}</suraContext.Provider>;
+  return <SuraContext.Provider value={value}>{children}</SuraContext.Provider>;
 };
 
-export default SuraContext;
+export default SuraContextProvider;

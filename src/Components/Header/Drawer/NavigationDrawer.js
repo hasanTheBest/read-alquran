@@ -57,8 +57,8 @@ function NavigationDrawer({
   const classes = useStyles();
   let { pathname } = useLocation();
 
-  const context = useContext(IndexContext);
-  console.log("context", context);
+  // const context = useContext(IndexContext);
+  // console.log("context", context);
 
   // const { openNavigationDrawer, toggleNavigationDrawer, handleChangeTab } =
   //   value !== undefined && value;

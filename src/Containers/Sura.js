@@ -8,7 +8,7 @@ import Banner from "../Components/Banner/Banner";
 import Words from "../Components/Words/Words";
 import SuraInfo from "../Components/SuraInfo/SuraInfo";
 import Footer from "../Components/Footer/Footer";
-import SuraContext from "../Context/SuraContext";
+import SuraContextProvider from "../Context/SuraContextProvider";
 import { SportsRugbySharp } from "@material-ui/icons";
 // import Aya from "../Components/Aya/Aya";
 
@@ -37,12 +37,12 @@ const Sura = () => {
   return (
     <div className="sura-container">
       <Suspense fallback={<Loading />}>
-        <SuraContext>
+        <SuraContextProvider>
           <Header />
           <SuraInfo suraId={Number(suraId) ? suraId : suraId.split(":")[0]} />
           <Aya />
           <Footer />
-        </SuraContext>
+        </SuraContextProvider>
       </Suspense>
     </div>
   );
