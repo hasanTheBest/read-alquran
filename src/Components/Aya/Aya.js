@@ -33,6 +33,8 @@ import borderClip from "./border.png";
 import AyaWrapper from "./AyaWrapper";
 import ReadingMode from "./ReadingMode";
 import AyaInfiniteLoader from "./AyaInfiniteLoader";
+import ayaVirtualLoader from "./AyaVirtualLoader";
+import AyaVirtualLoader from "./AyaVirtualLoader";
 
 const styles = makeStyles((theme) => ({
   maxWidthWrapper: {
@@ -143,7 +145,7 @@ const Aya = () => {
                         </>
                       )} */}
               <Box className={classes.pageContainer}>
-                <AyaInfiniteLoader />
+                <AyaVirtualLoader />
                 {/*                 {ayaWithPageInfo.map(
                   ({
                     a_id,

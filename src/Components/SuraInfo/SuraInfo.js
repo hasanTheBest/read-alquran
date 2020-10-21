@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import {
-  makeStyles,
-  Typography,
-  FormControl,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
+import React, { useContext, useState } from "react";
+import { makeStyles, FormControl, Select, MenuItem } from "@material-ui/core";
 
 import suraMeta from "../SuraInfo/data/suraMeta.json";
 import Bismillah from "./Bismillah";
 import SelectSura from "./SelectSura";
 import ExploreSuraMeta from "./ExploreSuraMeta";
+import { SuraContext } from "../../Context/SuraContextProvider";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -44,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 // Select Aya
 const SelectAya = ({ aya }) => {
   const classes = useStyles();
-  const [ayaValue, setAyaValue] = useState(0);
+  const { ayaOfSura, setAyaOfSura } = useContext(SuraContext);
 
   let optionsAya = [];
 
@@ -57,7 +52,7 @@ const SelectAya = ({ aya }) => {
     ];
   }
 
-  const handleChangeAya = (e) => setAyaValue(e.target.value);
+  const handleChangeAya = (e) => setAyaOfSura(e.target.value);
 
   // moves the menu below the select input
   const menuProps = {
@@ -74,7 +69,11 @@ const SelectAya = ({ aya }) => {
 
   return (
     <FormControl>
-      <Select MenuProps={menuProps} value={ayaValue} onChange={handleChangeAya}>
+      <Select
+        MenuProps={menuProps}
+        value={ayaOfSura}
+        onChange={handleChangeAya}
+      >
         <MenuItem value={0} className={classes.link}>
           AYA
         </MenuItem>
