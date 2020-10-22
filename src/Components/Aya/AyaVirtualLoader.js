@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   AutoSizer,
   CellMeasurer,
@@ -11,7 +11,14 @@ import AyaRenderSingle from "./AyaRenderSingle";
 
 const AyaVirtualLoader = () => {
   const { sura, ayaOfSura } = useContext(SuraContext);
+  // const [scrollToIndex, setScrollToIndex] = useState(-1)
   // console.log("AyaVirtualLoader -> ayaOfSura", ayaOfSura);
+
+  let scrollToIndex = ayaOfSura;
+  const setScrollToIndex = ({ scrollTop, scrollLeft }) => {
+    console.log("setScrollToIndex -> scrollLeft", scrollLeft);
+    console.log("setScrollToIndex -> scrollTop", scrollTop);
+  };
 
   const cache = new CellMeasurerCache({
     defaultHeight: 70,
@@ -44,8 +51,8 @@ const AyaVirtualLoader = () => {
   return (
     <>
       {console.log(Number(ayaOfSura))}
-      <WindowScroller>
-        {({ height, isScrolling, scrollTop, registerChild }) => (
+      <WindowScroller onScroll={setScrollToIndex}>
+        {({ height, isScrolling, scrollTop, onChildScroll, registerChild }) => (
           <div ref={registerChild} style={{ width: "100%" }}>
             <AutoSizer disableHeight>
               {({ width }) => (
@@ -54,11 +61,14 @@ const AyaVirtualLoader = () => {
                   isScrolling={isScrolling}
                   scrollTop={scrollTop}
                   rowRenderer={rowRenderer}
+                  deferredMeasurementCache={cache}
                   width={width}
                   height={height}
+                  onScroll={onChildScroll}
                   rowCount={sura.aya.length}
                   rowHeight={cache.rowHeight}
-                  scrollToIndex={String(ayaOfSura)}
+                  scrollToAlignment="start"
+                  scrollToIndex={50}
                 />
               )}
             </AutoSizer>
