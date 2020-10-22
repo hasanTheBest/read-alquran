@@ -42,27 +42,30 @@ const AyaVirtualLoader = () => {
   };
 
   return (
-    <WindowScroller>
-      {({ height, isScrolling, scrollTop, registerChild }) => (
-        <div ref={registerChild} style={{ width: "100%" }}>
-          <AutoSizer disableHeight>
-            {({ width }) => (
-              <VList
-                autoHeight
-                isScrolling={isScrolling}
-                scrollTop={scrollTop}
-                rowRenderer={rowRenderer}
-                width={width}
-                height={height}
-                rowCount={sura.aya.length}
-                rowHeight={cache.rowHeight}
-                scrollToIndex={Number(ayaOfSura)}
-              />
-            )}
-          </AutoSizer>
-        </div>
-      )}
-    </WindowScroller>
+    <>
+      {console.log(Number(ayaOfSura))}
+      <WindowScroller>
+        {({ height, isScrolling, scrollTop, registerChild }) => (
+          <div ref={registerChild} style={{ width: "100%" }}>
+            <AutoSizer disableHeight>
+              {({ width }) => (
+                <VList
+                  autoHeight
+                  isScrolling={isScrolling}
+                  scrollTop={scrollTop}
+                  rowRenderer={rowRenderer}
+                  width={width}
+                  height={height}
+                  rowCount={sura.aya.length}
+                  rowHeight={cache.rowHeight}
+                  scrollToIndex={String(ayaOfSura)}
+                />
+              )}
+            </AutoSizer>
+          </div>
+        )}
+      </WindowScroller>
+    </>
   );
 };
 
