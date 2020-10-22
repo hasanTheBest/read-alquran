@@ -22,7 +22,7 @@ import suraList from "../SuraInfo/data/suraMeta.json";
 // Components
 import Words from "../Words/Words";
 import Drawer from "../Header/Drawer/Drawer";
-import { pageByPage } from "../../Helper/helper";
+// import { pageByPage } from "../../Helper/helper";
 import PageMetaBarTop from "../Aya/PageMetaBarTop";
 import PageMetaBarBottom from "../Aya/PageMetaBarBottom";
 
