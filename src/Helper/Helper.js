@@ -16,6 +16,7 @@ export const tajweedMarker = (rule, text) => {
   return textSplitted.join("");
 };
 
+// sura page by page
 export const pageByPage = (sura, suraId, ayaCount, ayaId) => {
   let [pages, webFontFamilies, webFontUrls] = [[], [], []];
 
